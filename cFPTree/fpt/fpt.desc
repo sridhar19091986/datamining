@@ -1,0 +1,63 @@
+/////////////////////////////
+README for FP-tree algorithm
+////////////////////////////
+
+
+A. File Description
+===================
+fpt.c		-- The program file for mining large itemsets using a FP-tree algorithm
+		   with user given support threshold.
+Makefile	-- Makefile to compile fpt.c.
+configSample	-- A sample config. file storing the input parameter for fpt.c.
+dataSample.dat  -- A sample data file.
+
+
+B. Compilation
+==============
+Type:	make fpt
+
+
+C. Execution
+============
+Type:	fpt <config file name>
+
+You can also type "fpt" for details.
+
+
+D. Data File Format
+===================
+Each line of the data file consists of one transaction information.
+The first value of the line is the number of items in this transaction.
+Following the first value are the IDs of items in the transaction.
+The IDs of the items are numeric, and is ranged from zero to (M - 1)
+where M is the number of items in the database.
+
+
+E. Config. File Format
+======================
+Content of config. file:
+Line 1: Upper limit of large itemsets size to be mined
+        If this value is not larger than zero or
+        is greater than the greatest transaction size in the DB,
+        then it will be set to the greatest transaction size.
+Line 2: Support threshold (normalized to the range of (0, 1])
+	The value should be set large enough such that
+	any large itemset should appear in at least one transaction.
+Line 3: No. of items in the DB
+Line 4: No. of transactions in the DB
+Line 5: File name of the DB
+Line 6: Result file name to store the large itemsets found
+
+
+F. Running the sample
+=====================
+Type:	fpt configSample
+
+
+G. Reference
+============
+Title:		Mining Frequent Patterns without Candidate Generation
+Conference:	SIGMOD 2000
+Authors:	Jiawei Han, Jian Pei, and Yiwen Yin
+
+
