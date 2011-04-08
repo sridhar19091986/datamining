@@ -34,10 +34,14 @@ namespace FPTree
         
 
 
+       
         #region 测试数据集路径
-        static string TestData1 = Application.StartupPath + "\\testdata1_for_FP.dat";
-        static string TestData2 = Application.StartupPath + "\\testdata2_for_FP.dat";
-        static string TestData3 = Application.StartupPath + "\\testdata3_for_FP.dat";        
+        //static string TestData1 = Application.StartupPath + "\\testdata1_for_FP.dat";
+        //static string TestData2 = Application.StartupPath + "\\testdata2_for_FP.dat";
+        //static string TestData3 = Application.StartupPath + "\\testdata3_for_FP.dat";
+        static string TestData1 = @"c:\sysobjects.txt";
+        static string TestData2 = @"c:\sysobjects.txt";
+        static string TestData3 = @"c:\sysobjects.txt";
         #endregion
 
        
