@@ -1,6 +1,6 @@
-/* fpt.c (release mode) 
+/* fpt.c (release mode)
  *
- * Use threshold for finding large itemsets with supports >= the threshold. 
+ * Use threshold for finding large itemsets with supports >= the threshold.
  * This is the implementation using the FP-tree structure according to the paper:
  * 	Jiawei Han, Yiwen Yin: Mining Frequent Patterns without Candidate Generation,
  * 	ACM SIGMOD 2000, pages 1-12.
@@ -8,7 +8,7 @@
  * Program Input:
  *	A configuration file consisting of 6 parameters
  *	1. User specified maximum size of itemset to be mined
- *	   If this value is not larger than zero or 
+ *	   If this value is not larger than zero or
  *	   is greater than the greatest transaction size in the DB,
  *	   then it will be set to the greatest transaction size.
  *	2. Normalized support threshold, range: (0, 1]
@@ -23,14 +23,14 @@
  *	The support of each large itemset will also be displayed (enclosed by a bracket).
  *	It will output to both screen (standard output) and the result file.
  *
- */ 
+ */
 
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include <sys/resource.h>
-#include <sys/times.h>
+#include "resource.h"
+#include "times.h"
 #include <unistd.h>
 
 
@@ -39,7 +39,7 @@
  *	Each node of an FP-tree is represented by a 'FPnode' structure.
  *	Each node contains an item ID, count value of the item, and
  *	node-link as stated in the paper.
- *	
+ *
  */
 typedef struct FPnode *FPTreeNode;	/* Pointer to a FP-tree node */
 
@@ -57,7 +57,7 @@ typedef struct Childnode {
  * A FP-tree node
  */
 typedef struct FPnode {
-        int item;		/* ID of the item.  
+        int item;		/* ID of the item.
 				   Value of ID is within the range [0, m-1]
 				   where m is the total number of different items in the database. */
         int count;		/* Value of count of the item.
@@ -65,7 +65,7 @@ typedef struct FPnode {
 				   of the path reaching this node. */
 	int numPath;  		/* Number of leaf nodes in the subtree
 			           rooted at this node.  It is used to
-				   check whether there is only a single path 
+				   check whether there is only a single path
 				   in the FPgrowth function. */
 	FPTreeNode parent;	/* Pointer to parent node */
         childLink children;	/* Pointer to children */
@@ -83,7 +83,7 @@ typedef struct Itemsetnode {
 	int *itemset;
 	LargeItemPtr next;
 } ItemsetNode;
-		
+
 void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *baseItems, int baseSize);
 
 /***** Global Variables *****/
@@ -112,9 +112,9 @@ char outFile[100];		/* File name to store the result of mining */
  *	For each tree node being visited, all the child nodes
  *	are destroyed in a recursive manner before the destroy of the node.
  *
- * Invoked from:	
+ * Invoked from:
  * 	destroy()
- * 
+ *
  * Input Parameter:
  *	node	-> Root of the tree/subtree to be destroyed.
  */
@@ -148,9 +148,9 @@ void destroyTree(FPTreeNode node)
  *	- headerTableLink
  *	- root
  *
- * Invoked from:	
+ * Invoked from:
  * 	main()
- * 
+ *
  * Functions to be invoked:
  *	destroyTree()	-> Free memory from the FP-tree, root.
  *
@@ -159,7 +159,7 @@ void destroyTree(FPTreeNode node)
  */
 void destroy()
 {
- LargeItemPtr aLargeItemset; 
+ LargeItemPtr aLargeItemset;
  int i;
 
  for (i=0; i < realK; i++) {
@@ -174,7 +174,7 @@ void destroy()
  free(largeItemset);
 
  free(numLarge);
- 
+
  free(headerTableLink);
 
  destroyTree(root);
@@ -191,10 +191,10 @@ void destroy()
  *	Swap x-th element and i-th element of each of the
  *	two arrays, support[] and itemset[].
  *
- * Invoked from:	
+ * Invoked from:
  *	q_sortD()
  *	q_sortA()
- * 
+ *
  * Functions to be invoked: None
  *
  * Input Parameters:
@@ -205,8 +205,8 @@ void destroy()
  * Global variable: None
  */
 void swap(int *support, int *itemset, int x, int i)
-{ 
- int temp; 
+{
+ int temp;
 
  temp = support[x];
  support[x] = support[i];
@@ -214,7 +214,7 @@ void swap(int *support, int *itemset, int x, int i)
  temp = itemset[x];
  itemset[x] = itemset[i];
  itemset[i] = temp;
- 
+
  return;
 }
 
@@ -223,14 +223,14 @@ void swap(int *support, int *itemset, int x, int i)
  * Function: q_sortD
  *
  * Description:
- * 	Quick sort two arrays, support[] and the corresponding itemset[], 
+ * 	Quick sort two arrays, support[] and the corresponding itemset[],
  *	in descending order of support[].
  *
- * Invoked from:	
+ * Invoked from:
  *	pass1()
  *	genConditionalPatternTree()
  *	q_sortD()
- * 
+ *
  * Functions to be invoked:
  *	swap()
  *	q_sortD()
@@ -254,8 +254,8 @@ void q_sortD(int *support, int *itemset, int low,int high, int size)
 
  if(low>=highptr) return;
  do {
-	/* Find out, from the head of support[], 
-	 * the 1st element value not larger than the pivot's 
+	/* Find out, from the head of support[],
+	 * the 1st element value not larger than the pivot's
 	 */
 	pass=1;
 	while(pass==1) {
@@ -264,18 +264,18 @@ void q_sortD(int *support, int *itemset, int low,int high, int size)
 				pass=1;
 			else pass=0;
 		} else pass=0;
-	} 
+	}
 
-	/* Find out, from the tail of support[], 
-	 * the 1st element value not smaller than the pivot's 
-	 */ 
-	pass=1; 
+	/* Find out, from the tail of support[],
+	 * the 1st element value not smaller than the pivot's
+	 */
+	pass=1;
 	while(pass==1) {
-		if(high-->0) { 
-			if(support[high] < support[pivot]) 
+		if(high-->0) {
+			if(support[high] < support[pivot])
 				pass=1;
-			else pass=0; 
-		} else pass=0; 
+			else pass=0;
+		} else pass=0;
 	}
 
 	/* swap elements pointed by low pointer & high pointer */
@@ -285,10 +285,10 @@ void q_sortD(int *support, int *itemset, int low,int high, int size)
 
  swap(support, itemset, pivot, high);
 
- /* divide list into two for further sorting */ 
- q_sortD(support, itemset, pivot, high-1, size); 
+ /* divide list into two for further sorting */
+ q_sortD(support, itemset, pivot, high-1, size);
  q_sortD(support, itemset, high+1, highptr, size);
- 
+
  return;
 }
 
@@ -297,14 +297,14 @@ void q_sortD(int *support, int *itemset, int low,int high, int size)
  * Function: q_sortA
  *
  * Description:
- * 	Quick sort two arrays, indexList[] and the corresponding freqItemP[], 
+ * 	Quick sort two arrays, indexList[] and the corresponding freqItemP[],
  *	in ascending order of indexList[].
  *
- * Invoked from:	
+ * Invoked from:
  *	buildTree()
  *	buildConTree()
  *	q_sortA()
- * 
+ *
  * Functions to be invoked:
  *	swap()
  *	q_sortA()
@@ -328,8 +328,8 @@ void q_sortA(int *indexList, int *freqItemP, int low, int high, int size)
 
  if(low>=highptr) return;
  do {
-        /* Find out, from the head of indexList[], 
-	 * the 1st element value not smaller than the pivot's 
+        /* Find out, from the head of indexList[],
+	 * the 1st element value not smaller than the pivot's
 	 */
         pass=1;
         while(pass==1) {
@@ -341,7 +341,7 @@ void q_sortA(int *indexList, int *freqItemP, int low, int high, int size)
         }
 
         /* Find out, from the tail of indexList[],
-	 * 1st element value not larger than the pivot's 
+	 * 1st element value not larger than the pivot's
 	 */
         pass=1;
         while(pass==1) {
@@ -374,10 +374,10 @@ void q_sortA(int *indexList, int *freqItemP, int low, int high, int size)
  *	Add a large itemset, i.e. an itemset of support >= threshold,
  *	to the large itemsets list.
  *
- * Invoked from:	
+ * Invoked from:
  *	FPgrowth()
  *	combine()
- * 
+ *
  * Functions to be invoked: None
  *
  * Input parameters:
@@ -420,11 +420,11 @@ void addToLargeList(int *pattern, int patternSupport, int index)
  /* Assign aNode to point to the head of the resulting list */
  aNode = largeItemset[index];
 
- /* Insert the itemset to the (index+1)-itemset resulting list. 
+ /* Insert the itemset to the (index+1)-itemset resulting list.
   * There are 3 cases for the insertion:
   *	1. The resulting list is empty
   *		-- insert the itemset to the head of the list
-  *	2. The itemset should be inserted somewhere between 
+  *	2. The itemset should be inserted somewhere between
   *	   the head and tail of the list
   *		-- locate the suitable position of the list according to its support
   *		-- insert the itemset
@@ -432,7 +432,7 @@ void addToLargeList(int *pattern, int patternSupport, int index)
   *		-- append the itemset at the end of the list
   */
  if (aNode == NULL) {
-	/* Case 1: The resulting list is empty */	
+	/* Case 1: The resulting list is empty */
 	largeItemset[index] = aLargeItemset;
  } else {
  	while ((aNode != NULL) && (aNode->support > patternSupport)) {
@@ -454,7 +454,7 @@ void addToLargeList(int *pattern, int patternSupport, int index)
 
  /* Update the counter for the number of large (index+1)-itemsets in the list */
  (numLarge[index])++;
- 
+
  return;
 }
 
@@ -463,13 +463,13 @@ void addToLargeList(int *pattern, int patternSupport, int index)
  * Function: combine
  *
  * Description:
- *	Make all possible combinations of itemsets for a single path FP-tree.	
+ *	Make all possible combinations of itemsets for a single path FP-tree.
  *	Any of the combinations is a large itemset.
  *
- * Invoked from:	
+ * Invoked from:
  *	FPgrowth()
  *	combine()
- * 
+ *
  * Functions to be invoked:
  *	addToLargeList()
  *	combine()
@@ -478,25 +478,25 @@ void addToLargeList(int *pattern, int patternSupport, int index)
  *  	*itemList	-> Array to hold all items in the FP-tree path
  *  	*support	-> Counts of the items in the path (in *itemList)
  *  	*base		-> A large itemset discovered which will be used to combine
- *			   with additional items in *itemList to form more large itemsets 
+ *			   with additional items in *itemList to form more large itemsets
  *  	start		-> Position in *itemList where the base is formed
  *              	   from subset of the set of items in the prefix to this position,
  *			   and new large pattern will combine the base with
  *			   one additional element from the suffix to this position.
  *  	baseSize	-> Size of the base, i.e. number of items in base
- *    
+ *
  */
 void combine(int *itemList, int *support, int start, int itemListSize, int *base, int baseSize)
 {
  int *pattern;
- int i, j; 
+ int i, j;
 
  if (baseSize >= realK) return;
 
  if (start == itemListSize) return;
 
  /* Create an array of size (baseSize+1) to store any itemset formed from
-  * the union of *base and 
+  * the union of *base and
   * any item of *itemsetListSize from the position of start to the end
   */
  pattern = (int *) malloc (sizeof(int) * (baseSize+1));
@@ -505,30 +505,30 @@ void combine(int *itemList, int *support, int start, int itemListSize, int *base
 	exit(1);
  }
 
- /* Insert all the items in base[] to pattern[] 
+ /* Insert all the items in base[] to pattern[]
   */
  for (j=0; j < baseSize; j++)
 	pattern[j] = base[j];
 
  for (i=start; i < itemListSize; i++) {
 
-	/* Append an item, itemList[i], to pattern[] 
+	/* Append an item, itemList[i], to pattern[]
 	 */
 	pattern[baseSize] = itemList[i];
 
 	/* Insert pattern[] to the result list of large (baseSizes+1)-itemsets.
-	 * Support of this itemset = support[i] 
+	 * Support of this itemset = support[i]
 	 */
 	addToLargeList(pattern , support[i], baseSize);
 
-	/* Form pattern[] with 
+	/* Form pattern[] with
 	 * any item in *itemListSize from position (i+1) to the end of itemListSize
 	 */
-	combine(itemList, support, i+1, itemListSize, pattern, baseSize+1);	
+	combine(itemList, support, i+1, itemListSize, pattern, baseSize+1);
  }
 
  free(pattern);
- 
+
  return;
 }
 
@@ -555,7 +555,7 @@ void combine(int *itemList, int *support, int start, int itemListSize, int *base
  *	3. There is a match between the item and a child of the tree.
  *		Increment the count of the child, and visit the subtree of this child.
  *
- * Invoked from:	
+ * Invoked from:
  *	buildTree()
  *	buildConTree()
  *	insertTree()
@@ -566,12 +566,12 @@ void combine(int *itemList, int *support, int start, int itemListSize, int *base
  * Parameters:
  *  - freqItemP : The list of frequent items of the transaction.
  *                They are sorted according to the order of frequent 1-items.
- *  - indexList : 'indexList[i]' is the corresponding index of the header table 
+ *  - indexList : 'indexList[i]' is the corresponding index of the header table
  *                that represents the item 'freqItemP[i]'.
  *  - count     : The initial value for the 'count' of the FP-tree node for the current
  *                freqItemP[i].
  *		  It is equal to 1 if the FP-tree is the initial one,
- *		  otherwiese it is equal to the support of the base of 
+ *		  otherwiese it is equal to the support of the base of
  *		  this conditional FP-tree.
  *  - ptr       : Number of items in the frequent pattern inserted so far.
  *  - length    : Number of items in the frequent pattern.
@@ -579,8 +579,8 @@ void combine(int *itemList, int *support, int start, int itemListSize, int *base
  *  - headerTableLink : Header table of the FP-tree.
  *  - path      : Number of new tree path (i.e. new leaf nodes) created so far for the insertions.
  */
-void insert_tree(int *freqItemP, int *indexList, int count, int ptr, int length, 
-			FPTreeNode T, FPTreeNode *headerTableLink, int *path)  
+void insert_tree(int *freqItemP, int *indexList, int count, int ptr, int length,
+			FPTreeNode T, FPTreeNode *headerTableLink, int *path)
 {
  childLink newNode;
  FPTreeNode hNode;
@@ -646,7 +646,7 @@ void insert_tree(int *freqItemP, int *indexList, int count, int ptr, int length,
 	}
 
 	if (aNode == NULL) {
-		/* Case 2: Create a new child for T */ 
+		/* Case 2: Create a new child for T */
 
 		newNode = (childLink) malloc (sizeof(ChildNode));
 		if (newNode == NULL) {
@@ -698,7 +698,7 @@ void insert_tree(int *freqItemP, int *indexList, int count, int ptr, int length,
 		/* Insert next item, freqItemP[ptr+1], to the tree */
 		insert_tree(freqItemP, indexList, count, ptr+1, length, aNode->node, headerTableLink, path);
 
-		T->numPath += *path; 
+		T->numPath += *path;
 	}
  }
 
@@ -713,20 +713,20 @@ void insert_tree(int *freqItemP, int *indexList, int count, int ptr, int length,
  *	Build a conditional FP-tree and the corresponding header table from
  *	a conditional pattern base.
  *
- * Invoked from:	
+ * Invoked from:
  *	genConditionalPatternTree()
  *
  * Functions to be invoked:
  *	q_sortA()
  *	insert_tree()
- *	
+ *
  * Parameters:
  *	*conRoot	-> Root of the conditional FP-tree
  *	**conHeader	-> Conditional header table for all the frequent items.
  *	conHeaderSize	-> Number of items (frequent) in the conditional header table
- *	*conLargeItem	-> Stores all the frequent items of the conditional pattern base 
+ *	*conLargeItem	-> Stores all the frequent items of the conditional pattern base
  *	*conLargeItemSupprt	-> The conditional support counts of the conditional items
- *				   "Conditional support" of an item is 
+ *				   "Conditional support" of an item is
  *				    the number of itemsets containing the item and the base items.
  *	T		-> The parent conditional FP-tree
  *	headerTable	-> The parent header table
@@ -746,7 +746,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
  int count;
  int i;
 
- /* create conditional header table 
+ /* create conditional header table
   */
  *conHeader = (FPTreeNode *) malloc (sizeof(FPTreeNode) * conHeaderSize);
  if (*conHeader == NULL) {
@@ -756,7 +756,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
  for (i=0; i < conHeaderSize; i++)
         (*conHeader)[i] = NULL;
 
- /* create root of the conditional FP-tree 
+ /* create root of the conditional FP-tree
   */
  (*conRoot) = (FPTreeNode) malloc (sizeof(FPNode));
  if (*conRoot == NULL) {
@@ -764,7 +764,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
         exit(1);
  }
 
- /* Initialize the root of the conditional FP-tree 
+ /* Initialize the root of the conditional FP-tree
   */
  (*conRoot)->numPath = 1;
  (*conRoot)->parent = NULL;
@@ -793,7 +793,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
   * extract all the frequent items of the conditional pattern base.
   * Sort this items in descending order of their frequency and
   * insert them to the conditional FP-tree.
-  */ 
+  */
  while (aNode != NULL) {
 	ancestorNode = aNode->parent;
 	count = 0;
@@ -806,7 +806,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
 	 * conLargeItem[] contains all the frequent items
 	 * of the conditional pattern base.
 	 * Store the frequent items to freqItemP[], and
-	 * the corresponding index position of the 
+	 * the corresponding index position of the
 	 * conditional header table to indexList[].
 	 */
 	while (ancestorNode != T) {
@@ -861,7 +861,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
  *	headerSize		-> Number of items in the header table.
  *	*headerTableLink	-> Header table of the FP-tree (T).
  *
- * Invoked from:	
+ * Invoked from:
  *	FPgrowth()
  *
  * Functions to be invoked:
@@ -872,7 +872,7 @@ void buildConTree(FPTreeNode *conRoot, FPTreeNode **conHeader, int conHeaderSize
  * Parameters (Out):
  *	conLargeItem[]		-> To hold frequent items in the conditional pattern base.
  *	conLargeItemSupport[]	-> To hold "conditional support" of each items in the conditional pattern base.
- *				   "Conditional support" of an item is 
+ *				   "Conditional support" of an item is
  *				   the number of itemsets containing the item and the base items.
  *
  * Global Variables (read only):
@@ -896,36 +896,36 @@ void genConditionalPatternTree(int *pattern, int baseSize, int patternSupport,
 
  /* Find all the frequent items in the conditional pattern base.
   * -- Visit, in bottom-up manner, all the ancestor nodes of all the nodes containing this item.
-  * -- Count the "conditional supports" of the items in the ancestor nodes 
+  * -- Count the "conditional supports" of the items in the ancestor nodes
   *    (i.e. items in conditional pattern base), and store the values to conLargeSupport[].
-  *    "Conditional support" of an item is 
+  *    "Conditional support" of an item is
   *    the number of itemsets containing the item and the base items.
-  * -- Items in the ancestor nodes having conditional supports >= threshold are added to 
-  *    conLargeItem[]. 
+  * -- Items in the ancestor nodes having conditional supports >= threshold are added to
+  *    conLargeItem[].
   */
  while (aNode != NULL) {
-	ancestorNode = aNode->parent; 
+	ancestorNode = aNode->parent;
 
 	while (ancestorNode != T) {
 
 		for (j=0; j < headerSize; j++) {
 			if (ancestorNode->item == headerTableLink[j]->item) {
 
-				/* Increment the conditional support count 
-				 * for this ancestor item 
+				/* Increment the conditional support count
+				 * for this ancestor item
 				 */
-				conLargeItemSupport[j] += aNode->count;  
+				conLargeItemSupport[j] += aNode->count;
 
 				if ((conLargeItemSupport[j] >= threshold) &&
-				   (conLargeItemSupport[j] - aNode->count < 
+				   (conLargeItemSupport[j] - aNode->count <
 					threshold)) {
 
 					/* Add the ancestor item to the conditional pattern base,
 					 * and update the number of items in the
-					 * conditional header table 
+					 * conditional header table
 					 */
 					conLargeItem[j] = ancestorNode->item;
-					conHeaderSize++;	
+					conHeaderSize++;
 				}
 				break;
 			}
@@ -938,22 +938,22 @@ void genConditionalPatternTree(int *pattern, int baseSize, int patternSupport,
 	aNode = aNode->hlink;
  }
 
- /* Sort the items in the conditional pattern base in descending order of their 
+ /* Sort the items in the conditional pattern base in descending order of their
   * conditional support count
   */
  q_sortD(conLargeItemSupport, conLargeItem, 0, headerSize-1, headerSize);
 
 
- /* Generate the conditional FP-tree and mine recursively 
+ /* Generate the conditional FP-tree and mine recursively
   */
  if (conHeaderSize > 0) {
 
-	/* Build conditional FP-tree 
+	/* Build conditional FP-tree
 	 */
-	buildConTree(&conRoot, &conHeader, conHeaderSize, conLargeItem, conLargeItemSupport, 
+	buildConTree(&conRoot, &conHeader, conHeaderSize, conLargeItem, conLargeItemSupport,
 			T, headerTableLink, headerIndex, headerSize);
 
-	/* Mining 
+	/* Mining
 	 */
 	FPgrowth(conRoot, conHeader, conHeaderSize, pattern, baseSize+1);
 
@@ -974,7 +974,7 @@ void genConditionalPatternTree(int *pattern, int baseSize, int patternSupport,
  *	There are 2 cases for the FP-tree:
  *	Case 1:
  *		The tree consists of a single path only.
- * 		-- Form any combination of items in the path to 
+ * 		-- Form any combination of items in the path to
  *		   generate large itemsets containing the base items of this FP-tree.
  *	Case 2:
  *		The tree consists of more than one path.
@@ -983,7 +983,7 @@ void genConditionalPatternTree(int *pattern, int baseSize, int patternSupport,
  *		-- Build the conditional FP-tree for the item.
  *		-- Perfrom FPgrowth() for the conditional FP-tree.
  *
- * Invoked from:	
+ * Invoked from:
  *	main()
  *	genConditionalPatternTree()
  *
@@ -1016,7 +1016,7 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
  if (baseSize >= realK) return;
  if (T == NULL) return;
 
- /* Create array, conLargeItem, to store the items in the header table; 
+ /* Create array, conLargeItem, to store the items in the header table;
   * and also an array, conLargeItemSupport, to store the corresponding count value
   */
  conLargeItem = (int *) malloc (sizeof(int) * headerSize);
@@ -1033,7 +1033,7 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
 	count = 0;
 	if (T->children != NULL) aNode = T->children->node;
 
-	/* Visit the path in top-down manner, and store the items and count values 
+	/* Visit the path in top-down manner, and store the items and count values
 	 */
 	while (aNode != NULL) {
 		conLargeItem[count] = aNode->item;
@@ -1044,7 +1044,7 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
 		else	aNode = NULL;
 	}
 
-	/* Form any combination of items in the path to 
+	/* Form any combination of items in the path to
 	 * generate large itemsets containing the base items stored in 'baseItems'
 	 */
 	combine(conLargeItem, conLargeItemSupport, 0, count, baseItems, baseSize);
@@ -1055,8 +1055,8 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
  } else {
 	/* Multiple Path */
 
-	/* Create an array to store the base items for a conditional FP-tree. 
-	 * Size of the base should be (baseSize + 1). 
+	/* Create an array to store the base items for a conditional FP-tree.
+	 * Size of the base should be (baseSize + 1).
 	 */
 	pattern = (int *) malloc (sizeof(int) * (baseSize + 1));
 	if (pattern == NULL) {
@@ -1064,7 +1064,7 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
 		exit(1);
 	}
 
- 	/* Visit the header table in a top-down manner. 
+ 	/* Visit the header table in a top-down manner.
 	 * -- Find the conditional pattern base for each base item in the header table.
 	 * -- Find the frequent items of the conditional pattern base of the base item.
 	 * -- Build conditional FP-tree for the base item.
@@ -1092,8 +1092,8 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
 			aNode = aNode->hlink;
 		}
 
-		/* Add the itemset formed by the base items 
-		 * to the resulting list because it must be large. 
+		/* Add the itemset formed by the base items
+		 * to the resulting list because it must be large.
 		 */
 		addToLargeList(pattern, patternSupport, baseSize);
 
@@ -1121,7 +1121,7 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
  *	Scan the DB and find the support of each item.
  *	Find the large 1-itemsets according to the support threshold.
  *
- * Invoked from:	
+ * Invoked from:
  *	main()
  *
  * Functions to be invoked:
@@ -1138,7 +1138,7 @@ void FPgrowth(FPTreeNode T, FPTreeNode *headerTableLink, int headerSize, int *ba
  *	numTrans	-> number of transactions in the database
  *	expectedK	-> User specified maximum size of itemset to be mined
  *	dataFile	-> Database file
- *	
+ *
  */
 void pass1()
 {
@@ -1156,7 +1156,7 @@ void pass1()
 	exit(1);
  }
 
- for (i=0; i < numItem; i++) { 
+ for (i=0; i < numItem; i++) {
 	support1[i] = 0;
 	largeItem1[i] = i;
  }
@@ -1183,11 +1183,11 @@ void pass1()
 		fscanf(fp, "%d", &item);
 		support1[item]++;
 	}
- } 
+ }
  fclose(fp);
- 
- /* Determine the upper limit of itemset size to be mined according to DB and user input. 
-  * If the user specified maximum itemset size (expectedK) is greater than 
+
+ /* Determine the upper limit of itemset size to be mined according to DB and user input.
+  * If the user specified maximum itemset size (expectedK) is greater than
   * the largest transaction size (maxSize) in the database, or  exptectedK <= 0,
   * then set  realK = maxSize;
   * otherwise  realK = expectedK
@@ -1199,7 +1199,7 @@ void pass1()
  printf("max itemset size (K_max) to be mined  = %d\n", realK);
 
  /* Initialize large k-itemset resulting list and corresponding support list */
- largeItemset = (LargeItemPtr *) malloc (sizeof(LargeItemPtr) * realK); 
+ largeItemset = (LargeItemPtr *) malloc (sizeof(LargeItemPtr) * realK);
  numLarge = (int *) malloc (sizeof(int) * realK);
 
  if ((largeItemset == NULL) || (numLarge == NULL)) {
@@ -1216,7 +1216,7 @@ void pass1()
  q_sortD(&(support1[0]), largeItem1, 0, numItem-1, numItem);
 
  /*
- for (i=0; i < numItem; i++) 
+ for (i=0; i < numItem; i++)
  	printf("%d[%d] ", largeItem1[i], support1[i]);
  printf("\n");
  */
@@ -1237,7 +1237,7 @@ void pass1()
  * Description:
  *	Build the initial FP-tree.
  *
- * Invoked from:	
+ * Invoked from:
  *	main()
  *
  * Functions to be invoked:
@@ -1271,7 +1271,7 @@ void buildTree()
  }
  for (i=0; i < numLarge[0]; i++)
 	headerTableLink[i] = NULL;
-	
+
  /* Create root of the FP-tree */
  root = (FPTreeNode) malloc (sizeof(FPNode));
  if (root == NULL) {
@@ -1290,13 +1290,13 @@ void buildTree()
  if (freqItemP == NULL) {
 	printf("out of memory\n");
 	exit(1);
- }	
+ }
 
  indexList = (int *) malloc (sizeof(int) * numItem);
  if (indexList == NULL) {
 	printf("out of memory\n");
 	exit(1);
- }	
+ }
 
 
  /* scan DB and insert frequent items into the FP-tree */
@@ -1319,7 +1319,7 @@ void buildTree()
 		/* Read a transaction item */
 		fscanf(fp, "%d", &item);
 
-		/* Store the item to the frequent list, freqItemP, 
+		/* Store the item to the frequent list, freqItemP,
 		 * if it is a large 1-item.
 		 */
 		for (m=0; m < numLarge[0]; m++) {
@@ -1330,7 +1330,7 @@ void buildTree()
 				indexList[count] = m;
 				count++;
 				break;
-			} 
+			}
 		}
 	}
 
@@ -1341,7 +1341,7 @@ void buildTree()
 
 	/* Insert the frequent patterns of this transaction to the FP-tree. */
 	insert_tree(&(freqItemP[0]), &(indexList[0]), 1, 0, count, root, headerTableLink, &path);
- } 
+ }
  fclose(fp);
 
  free(freqItemP);
@@ -1360,7 +1360,7 @@ void buildTree()
  *	Output the large itemsets of all sizes
  *	to both screen and result file.
  *
- * Invoked from:	
+ * Invoked from:
  *	main()
  *
  * Functions to be invoked: None
@@ -1424,7 +1424,7 @@ void displayResult()
  * Description:
  *	Read the input parameters from the configuration file.
  *
- * Invoked from:	
+ * Invoked from:
  *	main()
  *
  * Functions to be invoked: None
@@ -1473,17 +1473,17 @@ void input(char *configFile)
  *
  * Description:
  *	This function reads the config. file for six input parameters,
- *	finds the frequent 1-itemsets, builds the initial FP-tree 
- *	using the frequent 1-itemsets and 
+ *	finds the frequent 1-itemsets, builds the initial FP-tree
+ *	using the frequent 1-itemsets and
  *	peforms the FP-growth algorithm of the paper.
  *	It measure both CPU and I/O time for build tree and mining.
  *
- * Functions to be invoked: 
+ * Functions to be invoked:
  *	input()		-> Read config. file
  *	pass1()		-> Scan DB and find frquent 1-itemsets
  *	buildTree()	-> Build the initial FP-tree
  *	FPgrowth()	-> Start mining
- *	
+ *
  * Parameters:
  *	Config. file name
  */

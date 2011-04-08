@@ -1,72 +1,86 @@
 #-----------------------------------------------------------------------
 # File    : makefile
-# Contents: build fpgrowth program
-# Author  : Christian Borgelt (modified by Li Ma)
-# History : 2004.11.21 file created from eclat makefile
-#           2004.12.10 general memory management system added
-#           2009.9.26 modified by Li Ma
+# Contents: build apriori program
+# Author  : Christian Borgelt
+# History : ??.??.1995 file created
+#           1997.10.13 macro ADDFLAGS added
+#           1997.12.07 minor improvements
+#           1998.01.04 table scanner management added
+#           1999.11.11 vector operations module added
+#           2000.11.04 modules vecops, symtab, and tabscan made external
+#           2001.11.18 module tract (transaction management) added
+#           2003.12.12 preprocessor definition ARCH64 added
 #-----------------------------------------------------------------------
 CC      = gcc
- CFBASE = -ansi -I$(UTILDIR) -I$(APRIDIR) $(ADDFLAGS)
-# CFBASE  = -ansi -Wall -pedantic -I$(UTILDIR) -I$(APRIDIR) $(ADDFLAGS)
-# CFLAGS  = $(CFBASE) -DNDEBUG -O3
+CFBASE  = -ansi -I$(UTILDIR) -I$(MATHDIR) $(ADDFLAGS)
+#CFBASE  = -ansi -Wall -pedantic -I$(UTILDIR) -I$(MATHDIR) $(ADDFLAGS)
+#CFLAGS  = $(CFBASE) -DNDEBUG -O3
 # CFLAGS  = $(CFBASE) -DNDEBUG -O3 -DBENCH
- CFLAGS  = $(CFBASE) -O3
+# CFLAGS  = $(CFBASE) -DNDEBUG -O3 -DARCH64
+CFLAGS = $(CFBASE) -O3
 # CFLAGS  = $(CFBASE) -g
+#CFLAGS  = $(CFBASE) -g -DARCH64
 # CFLAGS  = $(CFBASE) -g -DSTORAGE $(ADDINC)
-LDFLAGS = 
+LDFLAGS =
 LIBS    = -lm
 # ADDINC  = -I../../misc/src
 # ADDOBJ  = storage.o
 
-UTILDIR = ./util/src
-APRIDIR = ./apriori/src
-
-HDRS    = $(UTILDIR)/memsys.h $(UTILDIR)/vecops.h \
-          $(UTILDIR)/symtab.h $(UTILDIR)/tabscan.h \
-          $(UTILDIR)/scan.h   $(APRIDIR)/tract.h fptree.h
-OBJS    = $(UTILDIR)/memsys.o $(UTILDIR)/vecops.o \
-          $(UTILDIR)/nimap.o  $(UTILDIR)/tabscan.o \
-          $(UTILDIR)/scform.o $(APRIDIR)/tract.o  \
-          fptree.o fpgrowth.o $(ADDOBJ)
+UTILDIR = ../../util/src
+MATHDIR = ../../math/src
+HDRS    = $(UTILDIR)/vecops.h   $(UTILDIR)/symtab.h \
+          $(UTILDIR)/tabscan.h  $(UTILDIR)/scan.h \
+          $(MATHDIR)/gamma.h    $(MATHDIR)/chi2.h \
+          tract.h istree.h
+OBJS    = $(UTILDIR)/vecops.o   $(UTILDIR)/nimap.o \
+          $(UTILDIR)/tabscan.o  $(UTILDIR)/scform.o \
+          $(MATHDIR)/gamma.o    $(MATHDIR)/chi2.o \
+          tract.o istree.o apriori.o $(ADDOBJ)
 
 #-----------------------------------------------------------------------
 # Build Program
 #-----------------------------------------------------------------------
-all:        sfpgrowth
+all:       apriori
 
-sfpgrowth:   $(OBJS) makefile
+apriori:   $(OBJS) makefile
 	$(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $@
 
 #-----------------------------------------------------------------------
 # Main Program
 #-----------------------------------------------------------------------
-fpgrowth.o: $(HDRS)
-fpgrowth.o: fpgrowth.c makefile
-	$(CC) $(CFLAGS) -c fpgrowth.c -o $@
+apriori.o: tract.h istree.h $(UTILDIR)/symtab.h
+apriori.o: apriori.c makefile
+	$(CC) $(CFLAGS) -c apriori.c -o $@
 
 #-----------------------------------------------------------------------
-# Frequent Pattern Tree Management
+# Item and Transaction Management
 #-----------------------------------------------------------------------
-fptree.o:   fptree.h
-fptree.o:   fptree.c makefile
-	$(CC) $(CFLAGS) -c fptree.c -o $@
+tract.o:   tract.h $(UTILDIR)/symtab.h
+tract.o:   tract.c makefile
+	$(CC) $(CFLAGS) -c tract.c -o $@
+
+#-----------------------------------------------------------------------
+# Frequent Item Set Tree Management
+#-----------------------------------------------------------------------
+istree.o:  istree.h tract.h $(MATHDIR)/gamma.h
+istree.o:  istree.c makefile
+	$(CC) $(CFLAGS) -c istree.c -o $@
 
 #-----------------------------------------------------------------------
 # External Modules
 #-----------------------------------------------------------------------
-$(UTILDIR)/memsys.o:
-	cd $(UTILDIR); $(MAKE) memsys.o  ADDFLAGS=$(ADDFLAGS)
 $(UTILDIR)/vecops.o:
-	cd $(UTILDIR); $(MAKE) vecops.o  ADDFLAGS=$(ADDFLAGS)
+	cd $(UTILDIR); $(MAKE) vecops.o   ADDFLAGS=$(ADDFLAGS)
 $(UTILDIR)/nimap.o:
-	cd $(UTILDIR); $(MAKE) nimap.o   ADDFLAGS=$(ADDFLAGS)
+	cd $(UTILDIR); $(MAKE) nimap.o    ADDFLAGS=$(ADDFLAGS)
 $(UTILDIR)/tabscan.o:
-	cd $(UTILDIR); $(MAKE) tabscan.o ADDFLAGS=$(ADDFLAGS)
+	cd $(UTILDIR); $(MAKE) tabscan.o  ADDFLAGS=$(ADDFLAGS)
 $(UTILDIR)/scform.o:
-	cd $(UTILDIR); $(MAKE) scform.o  ADDFLAGS=$(ADDFLAGS)
-$(APRIDIR)/tract.o:
-	cd $(APRIDIR); $(MAKE) tract.o   ADDFLAGS=$(ADDFLAGS)
+	cd $(UTILDIR); $(MAKE) scform.o   ADDFLAGS=$(ADDFLAGS)
+$(MATHDIR)/gamma.o:
+	cd $(MATHDIR); $(MAKE) gamma.o    ADDFLAGS=$(ADDFLAGS)
+$(MATHDIR)/chi2.o:
+	cd $(MATHDIR); $(MAKE) chi2.o     ADDFLAGS=$(ADDFLAGS)
 
 #-----------------------------------------------------------------------
 # Storage Debugging
@@ -79,15 +93,15 @@ storage.o:  ../../misc/src/storage.c
 # Install
 #-----------------------------------------------------------------------
 install:
-	cp sfpgrowth $(HOME)/bin
+	cp apriori $(HOME)/bin
 
 #-----------------------------------------------------------------------
 # Clean up
 #-----------------------------------------------------------------------
 clean:
-	rm -f *.o *~ *.flc core sfpgrowth
+	rm -f *.o *~ *.flc core apriori
 	cd $(UTILDIR); $(MAKE) clean
-	cd $(APRIDIR); $(MAKE) localclean
+	cd $(MATHDIR); $(MAKE) clean
 
 localclean:
-	rm -f *.o *~ *.flc core sfpgrowth
+	rm -f *.o *~ *.flc core apriori
