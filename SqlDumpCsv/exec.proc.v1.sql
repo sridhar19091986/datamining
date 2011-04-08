@@ -1,13 +1,11 @@
 exec stat_hot_gprs '[PS总流量] desc','100','PS总流量100'
-
 exec stat_hot_gprs '[平均分配PDCH] desc','100','平均分配PDCH100'
-
+exec stat_hot_gprs '[PS立即指派成功率] asc','10000'
 exec stat_hot_gprs '[上行TBF建立成功率] asc','10000'
-
-
+exec stat_hot_gprs '[上行TBF建立成功率] asc','10000'
 exec stat_hot_gprs '[上行TBF掉线率] asc','10000'
+exec stat_hot_gprs '[EDGE下行速率] asc','10000'
 
-exec stat_hot_gprs '[上行TBF掉线率] asc','10000'
 
 
 指标	指标定义	目标
