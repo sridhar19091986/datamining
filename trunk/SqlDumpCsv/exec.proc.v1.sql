@@ -1,4 +1,4 @@
-use tempdb
+use RedianHedian
 exec stat_hot_gprs '[PS总流量] desc','10000','PS总流量10000'
 exec stat_hot_gprs '[平均分配PDCH] desc','10000','平均分配PDCH10000'
 exec stat_hot_gprs '[PS立即指派成功率] asc','10000','PS立即指派成功率10000'
