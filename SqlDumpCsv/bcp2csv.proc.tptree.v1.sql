@@ -15,7 +15,7 @@ BEGIN
  --输出原始表
  declare @sqlc varchar(8000)
  declare @sqld varchar(8000)
- set @sqlc='create view vw_bcpRedianSysobjects as      
+ set @sqlc='create view vw_bcpRedianSysobjects as    
             select top '+@sortTopCount+' *
             from [RedianHedian].[dbo].[gprsredian]
             order by '+@sortField

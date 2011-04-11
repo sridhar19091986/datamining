@@ -1,11 +1,11 @@
 use tempdb
-exec stat_hot_gprs '[PS总流量] desc','100','PS总流量100'
-exec stat_hot_gprs '[平均分配PDCH] desc','100','平均分配PDCH100'
-exec stat_hot_gprs '[PS立即指派成功率] asc','10000'
-exec stat_hot_gprs '[上行TBF建立成功率] asc','10000'
-exec stat_hot_gprs '[上行TBF建立成功率] asc','10000'
-exec stat_hot_gprs '[上行TBF掉线率] asc','10000'
-exec stat_hot_gprs '[EDGE下行速率] asc','10000'
+exec stat_hot_gprs '[PS总流量] desc','10000','PS总流量10000'
+exec stat_hot_gprs '[平均分配PDCH] desc','10000','平均分配PDCH10000'
+exec stat_hot_gprs '[PS立即指派成功率] asc','10000','PS立即指派成功率10000'
+exec stat_hot_gprs '[上行TBF建立成功率] asc','10000','上行TBF建立成功率10000'
+exec stat_hot_gprs '[下行TBF建立成功率] asc','10000','下行TBF建立成功率10000'
+exec stat_hot_gprs '[上行TBF掉线率] asc','10000','上行TBF掉线率10000'
+exec stat_hot_gprs '[EDGE下行速率] asc','10000','EDGE下行速率10000'
 
 
 
