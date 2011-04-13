@@ -17,3 +17,19 @@ PS立即指派成功率	1-REJPSIMMASS/(PSIMMASS+REJPSIMMASS)×100%	≥96%
 EDGE下行速率	RLC层平均吞吐率	≥80kbit/s
 投诉黑点解决率	黑点问题解决数/黑点问题总数×100%	≥90%
 数据业务黑点的优化规范
+
+use RedianHedian
+drop table [西湖村M3]
+go
+select  * into [西湖村M3]
+from [RedianHedian].[dbo].[gprsredian]
+where 小区名='西湖村M3'
+--
+ use RedianHedian
+ declare @sqld varchar(8000)
+ set @sqld= 'bcp RedianHedian..西湖村M3 out c:\西湖村M3.csv -c -t, -T -S' + @@servername
+ exec master..xp_cmdshell @sqld
+ --
+ use RedianHedian
+ select convert(varchar,MIN(时间),20)+'~'
+ +convert(varchar,MAX(时间),20)  from dbo.西湖村M3
