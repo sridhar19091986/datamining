@@ -7,6 +7,8 @@ exec stat_hot_gprs '[下行TBF建立成功率] asc','10000','下行TBF建立成功率10000'
 exec stat_hot_gprs '[上行TBF掉线率] asc','10000','上行TBF掉线率10000'
 exec stat_hot_gprs '[EDGE下行速率] asc','10000','EDGE下行速率10000'
 
+exec ExtractTable 'gprsredian_ps','[EDGE下行速率] asc','1','EDGE下行速率1'
+
 
 
 指标	指标定义	目标
@@ -33,3 +35,11 @@ where 小区名='西湖村M3'
  use RedianHedian
  select convert(varchar,MIN(时间),20)+'~'
  +convert(varchar,MAX(时间),20)  from dbo.西湖村M3
+--
+select * into gprsredian_ps
+from (
+SELECT b.*,a.PS立即指派数 as PS立即指派数,a.PS立即指派失败数 as   PS立即指派失败数
+FROM dbo.PS as a,dbo.gprsredian as b
+where a.时间=b.时间 and a.小区号=b.小区号
+) as c
+--
