@@ -7,7 +7,7 @@ exec stat_hot_gprs '[下行TBF建立成功率] asc','10000','下行TBF建立成功率10000'
 exec stat_hot_gprs '[上行TBF掉线率] asc','10000','上行TBF掉线率10000'
 exec stat_hot_gprs '[EDGE下行速率] asc','10000','EDGE下行速率10000'
 
-exec ExtractTable 'gprsredian_ps','[EDGE下行速率] asc','1','EDGE下行速率1'
+exec ExtractTable 'gprsredian_ps','[PS总流量] desc','10000','PS总流量10000'
 
 
 
