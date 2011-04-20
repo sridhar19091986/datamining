@@ -1,10 +1,11 @@
 
-
+USE [RedianHedian]
 select distinct Ê±¼ä,BSC,
 RPP0040,RPP4160,RPP6180,RPP8190,RPP9100,
 REJPSIMMASS,PREJOTH
 into gprsredian_ps_bsc_dist
 from gprsredian_ps_bsc
+where [BSC]='SZ37A'
 go
 USE [RedianHedian]
 drop table PREJOTH10000
