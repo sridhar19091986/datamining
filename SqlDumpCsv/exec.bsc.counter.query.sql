@@ -1,8 +1,8 @@
 
 USE [RedianHedian]
-select distinct 时间,BSC,
-RPP0040,RPP4160,RPP6180,RPP8190,RPP9100,
-REJPSIMMASS,PREJOTH
+drop table gprsredian_ps_bsc_dist
+go
+select  *
 into gprsredian_ps_bsc_dist
 from gprsredian_ps_bsc
 where [BSC]='SZ37A'
@@ -11,4 +11,4 @@ USE [RedianHedian]
 drop table PREJOTH10000
 go
 go
-exec ExtractTable 'gprsredian_ps_bsc_dist','[PREJOTH] desc','10000','PREJOTH10000'
+exec ExtractTable 'gprsredian_ps_bsc_dist','[时间] asc','10000','PREJOTH10000'
