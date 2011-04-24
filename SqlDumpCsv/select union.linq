@@ -2,26 +2,28 @@
   <Connection>
     <ID>337b631f-296e-4a3b-aa36-09f23a9a9a38</ID>
     <Server>.\SQLEXPRESS</Server>
-    <Persist>true</Persist>
     <Database>RedianHedian</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-//var cell_rp=from p in Gprs_cis.Take (50);
-//
-//var bsc_rp=from p in Gprs_rpps.Take (50);
-//
-//var cell_gis=from p in cGprs_cell_rps.Take (50);
 
-
-var m=from p in Gprs_cis.Take (50)
-	  from t in Gprs_cell_rps.Take (50)
-	  where p.Cell_name == t.CELL
+var m=from p in Gprs_cis
+	  from t in Gprs_cell_rps
+	  where p.Cell_no== t.CELL
+	  select new {p,t};
+	 // m.Dump();
+var n=from q in Gprs_rpps
+      group q by new {q.BSC,q.RPPID} into ttt
 	  select new 
-	  {
-	     p.BSC,p.Cell_name,p.Cellid,p.Latitude,p.Longitude,
-		 t.CELL,t.NOPDCH,t.RP
+	  {BSC=ttt.Key.BSC,RPPID=ttt.Key.RPPID,RPPLOAD=ttt.Sum(e=>e.RPPLOAD)};
 	  
-	  };
+var k=from q in n
+      from t in m
+	  where q.BSC==t.p.Bsc && q.RPPID.ToString() ==t.t.RP
+	  select new { q.BSC,q.RPPID,q.RPPLOAD,
+	  t.p.Bsc,t.p.Cell_name,t.p.Cell_no,t.p.Latitude,t.p.Longitude,t.p.基站代号,t.p.基站名,
+	  t.t.CELL,t.t.NOPDCH,t.t.RP};
+
+	  k.Dump();
