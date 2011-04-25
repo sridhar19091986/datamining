@@ -1,0 +1,6 @@
+G:\datamining\Tsou\Tsou\TsouConsole\bin\Debug\TsouConsole.exe.config
+G:\datamining\Tsou\Tsou\TsouConsole\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\datamining\Tsou\Tsou\TsouConsole\bin\Debug\TsouConsole.exe
+G:\datamining\Tsou\Tsou\TsouConsole\bin\Debug\TsouConsole.pdb
+G:\datamining\Tsou\Tsou\TsouConsole\obj\x86\Debug\TsouConsole.exe
+G:\datamining\Tsou\Tsou\TsouConsole\obj\x86\Debug\TsouConsole.pdb
