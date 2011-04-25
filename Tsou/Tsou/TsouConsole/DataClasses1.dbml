@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RedianHedian" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=RedianHedian;Integrated Security=True" SettingsObjectName="Tsou.Properties.Settings" SettingsPropertyName="RedianHedianConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.gprs_cell_rp" Member="gprs_cell_rp">
+    <Type Name="gprs_cell_rp">
+      <Column Name="CELL" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NOPDCH" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="RP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.gprs_ci" Member="gprs_ci">
+    <Type Name="gprs_ci">
+      <Column Name="cell_name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="cell_no" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="基站名" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="基站代号" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="bsc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="latitude" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.gprs_rpp" Member="gprs_rpp">
+    <Type Name="gprs_rpp">
+      <Column Name="时间" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BSC" Type="System.String" DbType="NVarChar(254)" CanBeNull="true" />
+      <Column Name="RPPID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RPPLOAD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.gprs_tousu" Member="gprs_tousu">
+    <Type Name="gprs_tousu">
+      <Column Name="请求编号" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="日期" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="受理时间" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="服务请求类别" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="受理工号" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="操作状态" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="用户级别" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="用户品牌" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="业务内容" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="经度" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="纬度" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
