@@ -20,30 +20,57 @@ namespace TsouConsole
         private double lon1;
         private double lat2;
         private double lon2;
+        private double minv;
+        //private Dictionary<GPRSoss, double> tousu_oss_distance = new Dictionary<GPRSoss, double>();
         private List<Tuple<GPRSoss, double>> tousu_oss_distance = new List<Tuple<GPRSoss, double>>();
         public GPRStuple(gprs_tousu tousu, List<GPRSoss> oss)
         {
             foreach (var o in oss)
             {
                 lat1 = L2Lat(o.Latitude);
-                lat2 = T2Lat(tousu.经度);
+                lat2 = T2Lon(tousu.纬度);
                 lon1 = L2Lon(o.Longitude);
-                lon2 = T2Lon(tousu.纬度);
-                distance = (lat1 - lat2) * (lat1 - lat2) + (lon1 - lon2) * (lon1 - lon2);
+                lon2 = T2Lat(tousu.经度);
+                //Console.WriteLine(lat1);
+                //Console.WriteLine(lat2);
+                //Console.WriteLine(lon1);
+                //Console.WriteLine(lon2);
+                if (lat1 < 10 || lat2 < 10 || lon1 < 10 || lon2 < 10)
+                    distance = 20;
+                else
+                    distance = (lat1 - lat2) * (lat1 - lat2) + (lon1 - lon2) * (lon1 - lon2);
+                //Console.WriteLine(distance);
+                //Console.WriteLine("----");
                 Tuple<GPRSoss, double> a = new Tuple<GPRSoss, double>(o, distance);
                 tousu_oss_distance.Add(a);
+                //tousu_oss_distance.Add(o, distance);
             }
+            minv = Min_Distance();
+
+            Console.WriteLine(minv);
         }
 
         private double Min_Distance()
         {
             return tousu_oss_distance.Min(e => e.Item2);
+            //return tousu_oss_distance.Min(e => e.Value);
         }
         public int? Get_RPPLOAD_Maybe()
         {
-            double minv = Min_Distance();
             if (minv == 0) return 0;
+            if (minv > 10) return 0;
             return tousu_oss_distance.Where(e => e.Item2 == minv).Select(e => e.Item1).Sum(e => e.RPPLOAD);
+            //return tousu_oss_distance.Where(e => e.Value == minv).Select(e => e.Key).Sum(e => e.RPPLOAD);
+        }
+        public string Get_Min_Distance_Cell()
+        {
+            if (minv == 0) return "0";
+            if (minv > 10) return "0";
+            string minc = tousu_oss_distance.Where(e => e.Item2 == minv).Select(e => e.Item1.Cell_no)
+                .Aggregate((name, next) => name + "," + next);
+            //string minc = tousu_oss_distance.Where(e => e.Value == minv).Select(e => e.Key.Cell_no)
+            //      .Aggregate((name, next) => name + "," + next);
+            return minc;
         }
         private double L2Lat(string input)
         {
@@ -69,13 +96,13 @@ namespace TsouConsole
         }
         private double T2Lat(string input)
         {
-            if (input==null) return 0;
+            if (input == null) return 0;
             if (input.IndexOf("无") != -1) return 0;
             return double.Parse(input);
         }
         private double T2Lon(string input)
         {
-            if (input==null) return 0;
+            if (input == null) return 0;
             if (input.IndexOf("无") != -1) return 0;
             return double.Parse(input);
         }
@@ -83,7 +110,7 @@ namespace TsouConsole
 
     public class GPRSoss
     {
-        public string BSC{get;set;}
+        public string BSC { get; set; }
         public int? RPPID { get; set; }
         public int? RPPLOAD { get; set; }
         public string Cell_name { get; set; }
@@ -127,8 +154,8 @@ namespace TsouConsole
                     select new { BSC = ttt.Key.BSC, RPPID = ttt.Key.RPPID, RPPLOAD = ttt.Sum(e => e.RPPLOAD) };
 
             var k = from q in n
-                    join  t in m
-                    on new { BSC=q.BSC, RPPID = q.RPPID.ToString() } equals new {BSC= t.p.bsc, RPPID=t.t.RP }
+                    join t in m
+                    on new { BSC = q.BSC, RPPID = q.RPPID.ToString() } equals new { BSC = t.p.bsc, RPPID = t.t.RP }
                     select new
                     {
                         q.BSC,
@@ -174,7 +201,7 @@ namespace TsouConsole
     {
         public static void write_rp(string line)
         {
-            string strPath = Directory.GetCurrentDirectory()+@"\Gprs_cissss.txt";
+            string strPath = Directory.GetCurrentDirectory() + @"\Gprs_cissss.txt";
             FileStream fs = new FileStream(strPath, FileMode.Create, FileAccess.Write);
             StreamWriter m_streamWriter = new StreamWriter(fs);
             m_streamWriter.Flush();
@@ -183,6 +210,7 @@ namespace TsouConsole
             m_streamWriter.Flush();
             m_streamWriter.Close();
         }
+        public static string strPath1 = Directory.GetCurrentDirectory() + @"\Gprs_cissss1.txt";
         public static string strTsou = Directory.GetCurrentDirectory() + @"\tousu.txt";
     }
 }
