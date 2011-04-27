@@ -9,12 +9,17 @@ CREATE PROCEDURE ExtractTable
 as 
 BEGIN
  if exists(select * from sysobjects where id=object_id('RedianHedian..'+@outFile))
- drop table bcpRedianSysobjects
+ begin 
+   declare @sql varchar(8000)
+   set @sql = 'drop table RedianHedian..'+@outFile
+   exec(@sql)
+ end
  declare @sqlc varchar(8000)
  declare @sqld varchar(8000)
  set @sqlc='select top '+@sortTopCount+' *
             into '+@outFile+'
             from '+@inputFile+'
+            where PREJOTH=0
             order by '+@sortField 
  exec(@sqlc)
  set @sqld= 'bcp RedianHedian..'+@outFile+' out c:\'+@outFile+'.csv -c -t, -T -S' + @@servername
