@@ -17,6 +17,7 @@ drop table bcpMasterSysobjects
  set @sqlc='select top '+@sortTopCount+' *
             into bcpRedianSysobjects
             from [RedianHedian].[dbo].[gprsredian_ps]
+            where PREJOTH<2000
             order by '+@sortField 
  exec(@sqlc)
  set @sqld= 'bcp RedianHedian..bcpRedianSysobjects out c:\'+@outFile+'.csv -c -t, -T -S' + @@servername
@@ -52,8 +53,8 @@ drop table bcpMasterSysobjects
       ,floor([PPSIMMASS]/1331.04)+0.025           as  [PPSIMMASS]
       ,floor([REJPSIMMASS]/4.44)+0.026           as  [REJPSIMMASS]
       ,floor([PSCHREQ]/3956.58)+0.027           as  [PSCHREQ]
-      ,floor([PREJTFI]/1.36)+0.028           as  [PREJTFI]
-      ,floor([PREJOTH]/1.36)+0.029           as  [PREJOTH]
+      ,floor([PREJTFI]/50)+0.028           as  [PREJTFI]
+      ,floor([PREJOTH]/50)+0.029           as  [PREJOTH]
       into bcpMasterSysobjects
       from bcpRedianSysobjects'
  exec(@sqla)
