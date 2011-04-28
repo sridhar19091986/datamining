@@ -19,7 +19,6 @@ BEGIN
  set @sqlc='select top '+@sortTopCount+' *
             into '+@outFile+'
             from '+@inputFile+'
-            where PREJOTH < 2000
             order by '+@sortField 
  exec(@sqlc)
  set @sqld= 'bcp RedianHedian..'+@outFile+' out c:\'+@outFile+'.csv -c -t, -T -S' + @@servername
