@@ -10,6 +10,8 @@ exec stat_hot_gprs '[EDGE下行速率] asc','10000','EDGE下行速率10000'
 exec ExtractTable 'gprsredian_ps','[PS总流量] desc','10000','PS总流量10000'
 exec ExtractTable 'BSCQOS','[ALLPDCHPCUFAIL] desc','10000','ALLPDCHPCUFAIL10000'
 exec ExtractTable 'gprsredian_ps_bsc','[ALLPDCHPCUFAIL] desc','10000','ALLPDCHPCUFAIL10000'
+exec ExtractTable 'CELLGPRS','[PS总流量] desc','10000','CELLGPRS10000'
+
 
 
 指标	指标定义	目标
