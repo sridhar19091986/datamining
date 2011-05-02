@@ -33,7 +33,7 @@ void Main()
 				strs += "\r\n";
 		}
 
-		write_rp(strs);
+		write_rp(strs,@"C:\fptree.txt");
 
 		m.Dump();
 
@@ -41,10 +41,11 @@ void Main()
 }
 
 // Define other methods and classes here
-void write_rp(string line)
+void write_rp(string line,string filename)
 {
+        File.Delete(filename);
 		//创建一个文件流，用以写入或者创建一个StreamWriter
-		FileStream fs = new FileStream ( @"C:\fptree.txt" , FileMode.Create, FileAccess.Write ) ;
+		FileStream fs = new FileStream ( filename , FileMode.Create, FileAccess.Write ) ;
 		StreamWriter m_streamWriter = new StreamWriter ( fs ) ;
 		m_streamWriter.Flush ( ) ;
 		// 使用StreamWriter来往文件中写入内容
