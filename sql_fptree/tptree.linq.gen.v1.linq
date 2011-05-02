@@ -21,11 +21,12 @@ void Main()
 		{
 			FieldInfo field = (FieldInfo)item;
 			fn = field.Name;
-			txtfile +="p."+fn+",\r\n";
+			txtfile += "strs += p."+fn+"+"+"\""+","+"\""+";\r\n";
 			step += 0.001;
-			fn = fn + " = (int)(p." + fn + "/ ((ttt.Max(e => e." + fn + ") - ttt.Min(e => e." + fn + ")) / stepbystep)) + " + step.ToString();
+			fn = fn + " = (int)(p." + fn + "/ ((ttt.Max(e => e." + fn + ") - ttt.Min(e => e." + fn + ")) / stepbystep)) + " + step.ToString()+",";
 			Console.WriteLine(fn);	
 		}
 	}
+	txtfile += "\r\n";
 	Console.WriteLine(txtfile);
 }
