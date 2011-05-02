@@ -20,7 +20,7 @@ void Main()
 
 		{
 
-				GPRS下行流量 = (int)(p.GPRS下行流量 / ((ttt.Max(e => e.PS下行流量) - ttt.Min(e => e.PS下行流量)) / stepbystep)) + 0.001
+				GPRS下行流量 = (int)(p.GPRS下行流量 / ((ttt.Max(e => e.GPRS下行流量) - ttt.Min(e => e.GPRS下行流量)) / stepbystep)) + 0.001
 
 
 		};
