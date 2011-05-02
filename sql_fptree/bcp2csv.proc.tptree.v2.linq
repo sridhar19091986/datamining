@@ -14,30 +14,18 @@ void Main()
 		var ttt = from p in Pdchredian1000s
 				  select p;
 		var m = from p in ttt
-
 				let stepbystep = 0.1 * ttt.Count()
-								 select new
-
-		{
-
+								 select new		{
 				GPRS下行流量 = (int)(p.GPRS下行流量 / ((ttt.Max(e => e.GPRS下行流量) - ttt.Min(e => e.GPRS下行流量)) / stepbystep)) + 0.001
-
-
 		};
-
-
 		string strs = null;
 		foreach(var p in m) {
 				strs += p.GPRS下行流量 +",";
 				//			strs +=p.Cell_name+","+p.Cell_no+","+p.lat+","+p.lon+","+p.基站代号+","+p.基站名;
 				strs += "\r\n";
 		}
-
 		write_rp(strs,@"C:\fptree.txt");
-
 		m.Dump();
-
-
 }
 
 // Define other methods and classes here
