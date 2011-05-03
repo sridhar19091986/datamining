@@ -1,0 +1,9 @@
+void Main()
+{
+    var ttt = from p in Pdchredian1000s
+              select p;
+    var m = from p in ttt
+            let stepbystep = 0.1 * ttt.Count()
+                             select new
+    {
+

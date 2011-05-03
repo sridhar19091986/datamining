@@ -11,10 +11,11 @@
 
 void Main()
 {
+	string txtlinqfile=null;
 	string txtlinq = null;
 	double step = 0;
 	string txtfile = null;
-	Type t = typeof(Pdchredian1000);
+	Type t = typeof(Pdchredian1000);//此处替换//注意修改Pdchredian1000s
 	foreach (var item in t.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
 	{
 		if (item.MemberType.ToString() == "Field")
@@ -25,58 +26,25 @@ void Main()
 			{
 				txtfile += "strs += p." + fn + "+" + "\"" + "," + "\"" + ";\r\n";
 				step += 0.001;
-				txtlinq += fn + " = (int)(p." + fn + "/ ((ttt.Max(e => e." + fn + ") - ttt.Min(e => e." + fn + ")) / stepbystep)) + " + step.ToString() + ",";
-				//Console.WriteLine(fn);
+				txtlinq += fn + " = (int)(p." + fn + "/ ((ttt.Max(e => e." + fn + ") - ttt.Min(e => e." + fn + ")) / stepbystep)) + " 
+				+ step.ToString() + ",";
 				txtlinq += "\r\n";
 			}
 		}
 	}
 	txtfile += "\r\n";
-	Console.WriteLine(a + "\r\n" + txtlinq + "\r\n" + b + "\r\n" + txtfile + "\r\n" + c + "\r\n");
+	txtlinqfile=a + "\r\n" + txtlinq + "\r\n" + b + "\r\n" + txtfile + "\r\n" + c + "\r\n";
+	txtlinqfile=txtlinqfile.Replace("Pdchredian1000","Pdchredian10000");//此处替换//注意修改Pdchredian1000s
+	Console.WriteLine(txtlinqfile);
 }
-
-//注意修改Pdchredian1000s
-
-string a = @"
-		   void Main()
-		   {
-		   var ttt = from p in Pdchredian1000s
-		   select p;
-		   var m = from p in ttt
-		   let stepbystep = 0.1 * ttt.Count()
-		   select new		{
-
-		   ";
-
-string b = @"
-		   };
-		   string strs = null;
-		   foreach(var p in m) {
-		   ";
-
-
+string a = ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\a.txt");
+string b =  ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\b.txt");
 static string d = "@" + "\"" + @"C:\fptree.txt" + "\"";
-
-string c = @"
-		   }
-		   write_rp(strs," + d + @");
-		   m.Dump();
-		   }
-
-		   // Define other methods and classes here
-		   void write_rp(string line,string filename)
-		   {
-		   File.Delete(filename);
-		   //创建一个文件流，用以写入或者创建一个StreamWriter
-		   FileStream fs = new FileStream ( filename , FileMode.Create, FileAccess.Write ) ;
-		   StreamWriter m_streamWriter = new StreamWriter ( fs ) ;
-		   m_streamWriter.Flush ( ) ;
-		   // 使用StreamWriter来往文件中写入内容
-		   m_streamWriter.BaseStream.Seek ( 0 , SeekOrigin.Begin ) ;
-		   // 把richTextBox1中的内容写入文件
-		   m_streamWriter.WriteLine( line ) ;
-		   //关闭此文件
-		   m_streamWriter.Flush ( ) ;
-		   m_streamWriter.Close ( ) ;
-		   }
-		   ";
+string c = ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\c.txt");   
+static string ReadPublicKey(string path)
+{
+	StreamReader reader = new StreamReader(path,Encoding.Default);
+	string publickey = reader.ReadToEnd();
+	reader.Close();
+	return publickey;
+}
