@@ -15,7 +15,8 @@ void Main()
 	string txtlinq = null;
 	double step = 0;
 	string txtfile = null;
-	Type t = typeof(Pdchredian1000);//此处替换//注意修改Pdchredian1000s
+	string txtheader=null;
+	Type t = typeof(平均分配PDCH10000);//此处替换//注意修改Pdchredian1000s
 	foreach (var item in t.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
 	{
 		if (item.MemberType.ToString() == "Field")
@@ -24,6 +25,7 @@ void Main()
 			string fn = field.Name;
 			if(fn != "时间" && fn != "小区名" && fn != "小区号" && fn != "BSC")
 			{
+			    txtheader += fn+",";
 				txtfile += "strs += p." + fn + "+" + "\"" + "," + "\"" + ";\r\n";
 				step += 0.001;
 				txtlinq += fn + " = (int)(p." + fn + "/ ((ttt.Max(e => e." + fn + ") - ttt.Min(e => e." + fn + ")) / stepbystep)) + " 
@@ -33,14 +35,16 @@ void Main()
 		}
 	}
 	txtfile += "\r\n";
-	txtlinqfile=a + "\r\n" + txtlinq + "\r\n" + b + "\r\n" + txtfile + "\r\n" + c + "\r\n";
-	txtlinqfile=txtlinqfile.Replace("Pdchredian1000","Pdchredian10000");//此处替换//注意修改Pdchredian1000s
+	txtheader=  "\""+txtheader+"\"";
+	txtlinqfile=a + "\r\n" + txtlinq + "\r\n" +  b  + txtheader+ e +"\r\n" + txtfile + "\r\n" + c + "\r\n";
+	txtlinqfile=txtlinqfile.Replace("Pdchredian1000","平均分配PDCH10000");//此处替换//注意修改Pdchredian1000s
 	Console.WriteLine(txtlinqfile);
 }
 string a = ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\a.txt");
 string b =  ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\b.txt");
 static string d = "@" + "\"" + @"C:\fptree.txt" + "\"";
-string c = ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\c.txt");   
+string c = ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\c.txt");  
+string e = ReadPublicKey(@"G:\datamining\sql_fptree\csharpScript\e.txt"); 
 static string ReadPublicKey(string path)
 {
 	StreamReader reader = new StreamReader(path,Encoding.Default);
