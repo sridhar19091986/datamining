@@ -11,12 +11,17 @@ exec ExtractTable 'gprsredian_ps','[PS总流量] desc','10000','PS总流量10000'
 exec ExtractTable 'BSCQOS','[ALLPDCHPCUFAIL] desc','10000','ALLPDCHPCUFAIL10000'
 exec ExtractTable 'gprsredian_ps_bsc','[ALLPDCHPCUFAIL] desc','10000','ALLPDCHPCUFAIL10000'
 exec ExtractTable 'CELLGPRS','[PS总流量] desc','10000','CELLGPRS10000'
-
-
 exec ExtractTable 'gprsredian_ps','[平均分配PDCH] desc','10000','平均分配PDCH10000'
-use RedianHedian
+exec ExtractTable 'gprsredian_ps','[平均分配PDCH] desc','10000','平均分配PDCH10000'
+
+
 exec ExtractTable 'gprsredian_new','[PS总流量] desc','10000','PS总流量10000'
-exec ExtractTable 'gprsredian_ps','[平均分配PDCH] desc','10000','平均分配PDCH10000'
+
+
+
+
+
+ -t, -T 
 
 指标	指标定义	目标
 上行TBF接入成功率	1-(PREJTFI+PREJOTH)/PSCHREQ×100%	≥96%
