@@ -15,7 +15,7 @@ exec ExtractTable 'CELLGPRS','[PS总流量] desc','10000','CELLGPRS10000'
 
 exec ExtractTable 'gprsredian_ps','[平均分配PDCH] desc','10000','平均分配PDCH10000'
 use RedianHedian
-
+exec ExtractTable 'gprsredian_new','[PS总流量] desc','10000','PS总流量10000'
 exec ExtractTable 'gprsredian_ps','[平均分配PDCH] desc','10000','平均分配PDCH10000'
 
 指标	指标定义	目标
