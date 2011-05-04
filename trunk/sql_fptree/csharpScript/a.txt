@@ -1,3 +1,14 @@
+<Query Kind="Program">
+  <Connection>
+    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
+    <Server>localhost</Server>
+    <Persist>true</Persist>
+    <Database>RedianHedian</Database>
+    <ShowServer>true</ShowServer>
+  </Connection>
+  <IncludePredicateBuilder>true</IncludePredicateBuilder>
+</Query>
+
 void Main()
 {
 
@@ -10,9 +21,10 @@ void Main()
     // 使用StreamWriter来往文件中写入内容
     m_streamWriter.BaseStream.Seek ( 0 , SeekOrigin.Begin ) ;
 
-    var ttt = from p in 平均分配PDCH10000s
+    var ttt = from p in Pdchredian1000s
+              orderby p.EDGE下行速率
               select p;
     var m = from p in ttt
-            let stepbystep = 0.1 * ttt.Count()
+            let stepbystep = 0.005 * ttt.Count()
                              select new
     {
