@@ -40,8 +40,8 @@ as
 --Generate column names as a recordset
 declare @columns varchar(8000), @sql varchar(8000), @data_file varchar(100)
 select
- --@columns=coalesce(@columns+',','')+column_name+' as ['+column_name +']' --表头不带"[]"
- @columns=coalesce(@columns+',','')+'['+column_name+'] as ['+column_name +']' --表头带"[]"
+ @columns=coalesce(@columns+',','')+column_name+' as ['+column_name +']' --表头不带"[]"
+ --@columns=coalesce(@columns+',','')+'['+column_name+'] as ['+column_name +']' --表头带"[]"
 from
  information_schema.columns
 where

@@ -19,9 +19,22 @@ exec ExtractTable 'gprsredian_new','[PS总流量] desc','10000','PS总流量10000'
 
 
 
+use RedianHedian
+EXEC proc_generate_excel_with_columns RedianHedian, 洲石m1,'C:\洲石m1.csv'
+
+use [IP_Stream]
+EXEC proc_generate_excel_with_columns IP_Stream, imeiType,'C:\imeiType.csv'
+
+use RedianHedian
+DECLARE @p0 NVarChar(7) = '18GB291'
+SELECT * 
+into 科技园二m1
+FROM [gprsredian_new] AS [t0]
+WHERE [t0].[小区号] = @p0
+go
+EXEC proc_generate_excel_with_columns RedianHedian, 科技园二m1,'C:\科技园二m1.csv'
 
 
- -t, -T 
 
 指标	指标定义	目标
 上行TBF接入成功率	1-(PREJTFI+PREJOTH)/PSCHREQ×100%	≥96%
