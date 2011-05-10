@@ -1,5 +1,5 @@
 
-use RedianHedian
+use mytest
 go
 if exists(select * from sysobjects where name='ExtractTable' and type='p')
 drop procedure ExtractTable
