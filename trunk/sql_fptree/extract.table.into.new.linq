@@ -3,7 +3,7 @@
     <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
     <Server>localhost</Server>
     <Persist>true</Persist>
-    <Database>mytest</Database>
+    <Database>RedianHedian</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
@@ -11,14 +11,14 @@
 
 void Main()
 {
-	  string drop=@"drop table mytest.dbo.PS总流量10000";
+	  string drop=@"drop table 平均分配PDCH10000";
 	  string create=@"
 	  select top 10000 * 
-	  into mytest.dbo.PS总流量10000
-      from Gprsredian_ps
-      order by PS总流量 desc
+	  into 平均分配PDCH10000
+      from Gprsredian
+      order by 平均分配PDCH desc
 	  ";
-	  //this.ExecuteCommand(drop);
+	  this.ExecuteCommand(drop);
 	  this.ExecuteCommand(create);
 }
 
