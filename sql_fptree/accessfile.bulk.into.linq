@@ -11,20 +11,19 @@
 
 void Main()
 {
-	string[]   dirs   =   Directory.GetFiles(@"D:\新建文件夹\新建文件夹");
-	foreach   (string   dir   in   dirs)
-	{
-	 string bulk = @"BULK INSERT gprsredian
-				  FROM '"+dir+@"'
-				  WITH
-				  (
-				  FIRSTROW = 2,
-				  FIELDTERMINATOR = ',',
-				  ROWTERMINATOR = '\n'
-				  ); ";
+   
+	string mdbfile=@"D:\FG.mdb";
+	
+	string bulk=@"
+	SELECT * 
+	INTO gprsredian
+	FROM 
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG_小区小时RAU";
+	
 		this.ExecuteCommand(bulk);	
-//		this.ExecuteQuery(bulk);
+
 		bulk.Dump();
-	}
 	
 }
+
+// Define other methods and classes here
