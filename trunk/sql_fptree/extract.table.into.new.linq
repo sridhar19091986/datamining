@@ -15,7 +15,7 @@ void Main()
 	  string create=@"
 	  select top 10000 * 
 	  into 平均分配PDCH10000
-      from Gprsredian
+      from gprsredian_ps
       order by 平均分配PDCH desc
 	  ";
 	  this.ExecuteCommand(drop);

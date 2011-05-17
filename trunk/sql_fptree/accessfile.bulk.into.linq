@@ -12,13 +12,13 @@
 void Main()
 {
    
-	string mdbfile=@"D:\FG.mdb";
+	string mdbfile=@"D:\全网EDGE终端比例.mdb";
 	
 	string bulk=@"
 	SELECT * 
-	INTO gprsredian
+	INTO 全网EDGE终端比例
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG_小区小时RAU";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG";
 	
 		this.ExecuteCommand(bulk);	
 
