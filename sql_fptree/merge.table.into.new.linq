@@ -11,20 +11,16 @@
 
 void Main()
 {
-	  string drop=@"drop table mytest.dbo.gprsredian_ps";
+	  string drop=@"drop table gprsredian_ps";
 	  string create=@"
-	  select * into mytest.dbo.gprsredian_ps
+	  select * into  gprsredian_ps
 from (
-SELECT a.*,b.PS总流量,
-b.上行TBF异常释放,	b.PS立即指派成功率,	b.上行TBF掉线率,	
-b.平均分配PDCH,	b.平均使用PDCH,	b.GPRS下行激活信道,	b.GPRS每线下行用户,	
-b.EDGE下行激活信道,	b.EDGE每线下行用户,	b.PDCH复用度,	
-b.PSIMMASS,	b.REJPSIMMASS,	b.PSCHREQ,	b.PREJTFI,	b.PREJOTH,	b.FAILDLTBFEST
-FROM dbo.gsmredian as a,dbo.gprsredian_new b
+SELECT a.*,b.EDGE终端比例
+FROM Gprsredian as a,全网EDGE终端比例 as b
 where a.时间=b.时间 and a.小区号=b.小区号
 ) as c
 	  ";
-	  this.ExecuteCommand(drop);
+	  //this.ExecuteCommand(drop);
 	  this.ExecuteCommand(create);
 }
 
