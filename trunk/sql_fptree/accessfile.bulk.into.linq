@@ -12,13 +12,13 @@
 void Main()
 {
    
-	string mdbfile=@"D:\全网EDGE终端比例.mdb";
+	string mdbfile=@"c:\SZ24B_hedian.mdb";
 	
 	string bulk=@"
 	SELECT * 
-	INTO 全网EDGE终端比例
+	INTO SZ24B_hedian
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...fg";
 	
 		this.ExecuteCommand(bulk);	
 

@@ -9,22 +9,26 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-void Main()
-{
-	string[]   dirs   =   Directory.GetFiles(@"D:\新建文件夹\新建文件夹");
-	foreach   (string   dir   in   dirs)
+	void Main()
 	{
-	 string bulk = @"BULK INSERT gprsredian
-				  FROM '"+dir+@"'
-				  WITH
-				  (
-				  FIRSTROW = 2,
-				  FIELDTERMINATOR = ',',
-				  ROWTERMINATOR = '\n'
-				  ); ";
-		this.ExecuteCommand(bulk);	
-//		this.ExecuteQuery(bulk);
-		bulk.Dump();
+		string[] dirs = Directory.GetFiles(@"C:\");
+		foreach (string dir in dirs)
+		{
+
+			if (dir.IndexOf(".csv") != -1)
+			{
+				string bulk = @"BULK INSERT gprsredian
+						  FROM '" + dir + @"'
+						  WITH
+						  (
+							  FIRSTROW = 2,
+							  FIELDTERMINATOR = ',',
+							  ROWTERMINATOR = '\n'
+						  ); ";
+				this.ExecuteCommand(bulk);
+				//this.ExecuteQuery(bulk);
+				bulk.Dump();
+			}
+		}
+
 	}
-	
-}
