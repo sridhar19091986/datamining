@@ -19,6 +19,6 @@ var pdch=from p in Gprsredian_news
 		 
 		 };
 		
-		 N={(NE/R)*(NEU/NET)}
+//		 N={(NE/R)*(NEU/NET)}
 		 
 	pdch.Where(e=>e.pdch_r>0.8).Where(e=>e.pdch_m>6).Dump();

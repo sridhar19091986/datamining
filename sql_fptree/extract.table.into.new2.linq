@@ -11,14 +11,20 @@
 
 void Main()
 {
-	  string drop=@"drop table hedian上行TBF掉线率10000";
+      string siteno="HalfRateEdge1day";
+	  string drop=@"
+                if exists(select * from sysobjects where type = 'U' and name = '"+siteno+@"') 
+                drop table "+siteno;
 	  string create=@"
-	  select top 10000 * 
-	  into hedian上行TBF掉线率10000
+	  select 
+	  H话务比,
+	  数据业务占比,
+	  EDGE下行速率,
+	  EDGE每线下行用户
+	  into "+siteno+@"
       from hedian
-      order by 上行TBF掉线率 desc
 	  ";
-	  //this.ExecuteCommand(drop);
+	  this.ExecuteCommand(drop);
 	  this.ExecuteCommand(create);
 }
 

@@ -11,7 +11,7 @@
 
 void Main()
 {
-      string siteno="樟阁村d3";
+      string siteno="深莞电子L0";
 	  string drop=@"
                 if exists(select * from sysobjects where type = 'U' and name = '"+siteno+@"') 
                 drop table "+siteno;
@@ -19,7 +19,7 @@ void Main()
 	  select 
 *
 	  into "+siteno+@"
-      from gprsredian_ps
+      from hedian
 	  where 小区名='"+siteno+@"'
       order by 时间 
 	  ";
