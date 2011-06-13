@@ -12,13 +12,13 @@
 void Main()
 {
    
-	string mdbfile=@"c:\SZ24B_hedian.mdb";
+	string mdbfile=@"C:\老魏要6月8日\老魏要6月8日\SZ01_11指标0601-0607.mdb";
 	
 	string bulk=@"
 	SELECT * 
-	INTO SZ24B_hedian
+	INTO redian_hedian
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...fg";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG_小区小时GPRS性能";
 	
 		this.ExecuteCommand(bulk);	
 
