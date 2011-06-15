@@ -9,7 +9,7 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-	void Main()
+void Main()
 	{
 		var busyhour = from p in SZ24B_hedians
 					   group p by p.时间 into ttt
@@ -47,7 +47,7 @@
 						   EDGE下行激活信道 = p.EdgeChan,
 						   GPRS每线下行用户 = p.GprsSubPerChan,
 						   GPRS下行激活信道 = p.GprsChan,
-						   TBFLIMIT = ((p.EdgeSubPerChan * p.EdgeChan + p.GprsSubPerChan * p.GprsChan) / 4) / ((p.Tchan - p.Terl / 0.9) / 8)
+						   TBFLIMIT = ((p.EdgeSubPerChan * p.EdgeChan + p.GprsSubPerChan * p.GprsChan) / 4) / ((p.Tchan - 0.9*p.Terl) / 8)
 					   };
 		tbflimit.Dump();
 
