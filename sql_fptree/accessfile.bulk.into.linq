@@ -11,22 +11,37 @@
 
 void Main()
 {
-   
-	string mdbfile=@"D:\指标\SZ51_55指标0605-0611.mdb";
-	
+   	
 	//FG_小区小时GPRS性能
 	//现网cdd_Channel
-	//SELECT * INTO osspfc_gbtable
-	
-	string bulk=@"
-	
-	insert into osspfc_gbtable select *
-	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG_小区小时GPRS性能";
-	
-		this.ExecuteCommand(bulk);	
 
-		bulk.Dump();
+//    此2行修改
+	string mdbfile=@"G:\BSC级指标\SZ48_55指标0609-0616.mdb";
+	int i=1;
+
+	
+	string bulknew=@"
+	
+	SELECT * INTO BSCGPRS2
+	FROM 
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...BSCGPRS2";
+	
+	string bulkinsert=@"
+	
+	insert into BSCGPRS2 select *
+	FROM 
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...BSCGPRS2";
+
+		
+		if(i==0)
+		{
+		this.ExecuteCommand(bulknew);bulknew.Dump();
+		}
+	    else
+		{
+      	this.ExecuteCommand(bulkinsert);bulkinsert.Dump();
+		}
+		
 	
 }
 
