@@ -21,8 +21,10 @@ var pfc = from p in Osspfc_gbtables
 	ci_name = p.小区名,
 	stat_time = p.时间,
 	用户平均下行速率 = (p.EDGE下行速率+p.GPRS下行速率)/2,     //用户平均下行速率
-	平均每PFC下行流量 = (p.EDGE每PFC下行流量 +p.GPRS每PFC下行流量) / 2,   //平均pfc标识业务识别
-	平均每信道下行速率 = (p.EDGE每信道下行速率+p.GPRS每信道下行速率)/2  //小区平均下行速率
+	平均每PFC下行流量 = (p.EDGE每PFC下行流量 +p.GPRS每PFC下行流量) / 2,   //平均pfc下行速率
+	平均每信道下行速率 = (p.EDGE每信道下行速率+p.GPRS每信道下行速率)/2,  //小区平均下行速率
+	下行PFC_下行复用度= (p.EDGE每PFC下行流量*p.EDGE每线下行用户+p.GPRS每PFC下行流量*p.GPRS每线下行用户) / 2, 
+	下行PFC_PDCH复用度=p.PDCH复用度* (p.EDGE每PFC下行流量 +p.GPRS每PFC下行流量) / 2   //平均pfc下行速率
 };
 
 pfc.Dump();
