@@ -30,6 +30,7 @@ void Main()
 					  Ttime = bh.Value.Hour,
 					  Tchan = ttt.Average(e => e.T可用信道),
 					  Terl = ttt.Average(e => e.T话务量),
+					  Thalf=ttt.Average(e=>e.H话务比),
 					  Tpdch=ttt.Average(e=>e.平均分配PDCH总数),
 					  dltbf=ttt.Average(e=>e.下行TBF建立成功率)
 					  //Tedge=ttt.Average(e=>e.EDGE下行激活信道),
@@ -51,7 +52,8 @@ void Main()
 						   Tpdch=p.Tpdch,
 						   Tuse=tch+p.Tpdch,
 						   Ruse=(tch+p.Tpdch)/p.Tchan,
-						   dltbf=p.dltbf
+						   dltbf=p.dltbf,
+						   p.Thalf
 //						   EDGE每线下行用户 = p.EdgeSubPerChan,
 //						   EDGE下行激活信道 = p.EdgeChan,
 						   //GPRS每线下行用户 = p.GprsSubPerChan,

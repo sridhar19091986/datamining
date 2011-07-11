@@ -9,11 +9,11 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-var tbf=from p in BSCGPRS2_20110626s
+var tbf=from p in BSCGPRS2_20110707s
         where p.上行TBF建立成功率>0
-				where p.BSC=="SZ47G" 
+				where p.BSC=="SZ34A" 
 		//|| p.BSC=="SZ35B"
-        orderby p.下行TBF建立成功率
+//        orderby p.下行TBF建立成功率
 		select p;
 		
 	tbf.Dump();

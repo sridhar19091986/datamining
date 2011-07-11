@@ -9,8 +9,8 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-var tbf=from p in BSCGPRS2s
- where p.BSC=="SZ27B"
+var tbf=from p in EMGPRS_20110707s
+ where p.BSC=="SZ34A"
         group p by p.RPPID into ttt
 		select new 
 		{

@@ -16,13 +16,13 @@ void Main()
 	//现网cdd_Channel
 
 //    此2行修改
-	string mdbfile=@"D:\EMGPRS2011-06-26.mdb";
+	string mdbfile=@"D:\My Documents\桌面\BSC指标4\EMGPRS.mdb";
 	int i=0;
 
 	
 	string bulknew=@"
 	
-	SELECT * INTO EMGPRS_20110626
+	SELECT * INTO EMGPRS_20110707
 	FROM 
 	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...EMGPRS";
 	
@@ -34,7 +34,7 @@ void Main()
 
 		
 		if(i==0)
-		{
+		{bulknew.Dump();
 		this.ExecuteCommand(bulknew);bulknew.Dump();
 		}
 	    else

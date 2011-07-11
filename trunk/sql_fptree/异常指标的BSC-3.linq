@@ -9,8 +9,8 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-var ttime=BSCGPRS2_20110626s.Min(e=>e.时间).Value;
-		var mtime=BSCGPRS2_20110626s.Max(e=>e.时间).Value;
+var ttime=BSCGPRS2_20110707s.Min(e=>e.时间).Value;
+		var mtime=BSCGPRS2_20110707s.Max(e=>e.时间).Value;
 
 var tbf=from p in BSCGPRS2_20110626s
         where p.下行TBF建立成功率>0

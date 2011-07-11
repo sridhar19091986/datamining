@@ -1,8 +1,8 @@
 <Query Kind="Program">
   <Connection>
-    <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
-    <Persist>true</Persist>
+    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
     <Server>localhost</Server>
+    <Persist>true</Persist>
     <Database>PFCredianhedian</Database>
     <ShowServer>true</ShowServer>
   </Connection>
@@ -11,7 +11,7 @@
 
 void Main()
 	{
-		var busyhour = from p in BSCGPRS2_20110630s
+		var busyhour = from p in BSCGPRS2_20110707s
 		              // let ttime=DateTime.Parse(p.时间)  //方法“System.DateTime Parse(System.String)”不支持转换为 SQL。
 		               let ttime=Convert.ToDateTime(p.时间)
 					   group p by ttime into ttt
@@ -23,18 +23,24 @@ void Main()
         var bh1 = busyhour.OrderByDescending(e => e.T话务量).ToList();
 		var bh = bh1.FirstOrDefault().时间;
 
-		var tbf = from p in  BSCGPRS2_20110630s
+		var tbf = from p in  BSCGPRS2_20110707s
 		          let ttime=Convert.ToDateTime(p.时间)
-				  where ttime.Hour == bh.Hour
+				  where ttime.Hour == 21
 				  group p by p.BSC into ttt
 				  select new
 				  {
 					  BSC = ttt.Key,
-					  Ttime = bh.Hour,
+					  Ttime =21,
 					  Tchan = ttt.Average(e => e.T可用信道),
 					  Terl = ttt.Average(e => e.T话务量),
+					  Thalf=ttt.Average(e=>e.H话务比),
+	                  Tfault=ttt.Average(e=>e.T损坏率),
 					  Tpdch=ttt.Average(e=>e.平均分配PDCH总数),
-					  dltbf=ttt.Average(e=>e.下行TBF建立成功率)
+					  下行TBF建立成功率=ttt.Average(e=>e.下行TBF建立成功率),
+					  EDGE终端使用EDGE比例=ttt.Average(e=>e.EDGE终端使用EDGE比例),
+					  TusePDCH=ttt.Average(e=>e.PDCH复用度),
+					  //Tt=ttt.Average(e=>e.
+					  
 					  //Tedge=ttt.Average(e=>e.EDGE下行激活信道),
 					  //EdgeSubPerChan = ttt.Average(e => e.EDGE每线下行用户),
 					  //EdgeChan = ttt.Average(e => e.EDGE下行激活信道),
@@ -54,7 +60,11 @@ void Main()
 						   Tpdch=p.Tpdch,
 						   Tuse=tch+p.Tpdch,
 						   Ruse=(tch+p.Tpdch)/p.Tchan,
-						   dltbf=p.dltbf
+						   下行TBF建立成功率=p.下行TBF建立成功率,
+						   p.Thalf,
+						   p.Tfault,
+						   p.EDGE终端使用EDGE比例,
+						   p.TusePDCH
 //						   EDGE每线下行用户 = p.EdgeSubPerChan,
 //						   EDGE下行激活信道 = p.EdgeChan,
 						   //GPRS每线下行用户 = p.GprsSubPerChan,
@@ -64,7 +74,7 @@ void Main()
 						   //GPRSchan=p.Tchan - tch-p.Tedge,
 						   //TBFLIMIT =10* ((p.GprsSubPerChan * p.GprsChan) / 4) / ((p.Tchan - tch-p.Tedge) / 8)
 					   };
-		tbflimit.OrderByDescending(e=>e.Ruse).Dump();
+		tbflimit.OrderBy(e=>e.EDGE终端使用EDGE比例).Dump();
 
 	}
 	
