@@ -10,11 +10,14 @@
 </Query>
 
 var tbf=from p in EMGPRS_20110707s
- where p.BSC=="SZ34A"
-        group p by p.RPPID into ttt
+ where p.BSC=="SZ47D"
+ where p.时间.Value.Day==3
+  where p.时间.Value.Hour==10
+        group p by new {p.时间,p.RPPID} into ttt
 		select new 
 		{
-		   RPPID=ttt.Key,
+		   时间=ttt.Key.时间,
+		   RPPID=ttt.Key.RPPID,
 		   RPPLOAD=ttt.Sum(e=>e.RPPLOAD)
 		};
 		

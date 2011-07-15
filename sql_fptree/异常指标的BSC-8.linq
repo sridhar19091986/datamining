@@ -50,6 +50,7 @@ void Main()
 
 		var tbflimit = from p in tbf.ToList()
 		               let tch=erlangbinv(0.02,p.Terl)
+					   where p.EDGE终端使用EDGE比例>87
 					   select new
 					   {
 						   小区号 = p.BSC,
@@ -74,7 +75,7 @@ void Main()
 						   //GPRSchan=p.Tchan - tch-p.Tedge,
 						   //TBFLIMIT =10* ((p.GprsSubPerChan * p.GprsChan) / 4) / ((p.Tchan - tch-p.Tedge) / 8)
 					   };
-		tbflimit.OrderBy(e=>e.EDGE终端使用EDGE比例).Dump();
+		tbflimit.OrderBy(e=>e.下行TBF建立成功率).Dump();
 
 	}
 	

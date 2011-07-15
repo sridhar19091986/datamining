@@ -16,15 +16,15 @@ void Main()
 	//现网cdd_Channel
 
 //    此2行修改
-	string mdbfile=@"D:\My Documents\桌面\BSC指标4\EMGPRS.mdb";
+	string mdbfile=@"D:\BSC.mdb";
 	int i=0;
 
 	
 	string bulknew=@"
 	
-	SELECT * INTO EMGPRS_20110707
+	SELECT * INTO BSCGPRSCHECK_20110715
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...EMGPRS";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...BSCGPRSCHECK";
 	
 	string bulkinsert=@"
 	
