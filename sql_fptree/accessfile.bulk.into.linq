@@ -1,9 +1,9 @@
 <Query Kind="Program">
   <Connection>
-    <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
-    <Persist>true</Persist>
+    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
     <Server>localhost</Server>
-    <Database>PFCredianhedian</Database>
+    <Persist>true</Persist>
+    <Database>CellLoadSharing</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
@@ -16,14 +16,14 @@ void Main()
 	//现网cdd_Channel
 
 //    此2行修改
-	string mdbfile=@"d:\BSCGPRS22011-07-29.mdb";
+	string mdbfile=@"d:\小区基础数据2011-08-05.mdb";
 	int i=0;
 
 	
 	string bulknew=@"
-	SELECT * INTO BSC_20110729
+	SELECT * INTO 小区基础数据0803
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...BSCGPRS2";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...小区基础数据";
 	
 	string bulkinsert=@"
 	
