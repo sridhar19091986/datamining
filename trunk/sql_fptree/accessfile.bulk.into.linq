@@ -16,12 +16,12 @@ void Main()
 	//现网cdd_Channel
 
 //    此2行修改
-	string mdbfile=@"d:\小区基础数据2011-08-05.mdb";
+	string mdbfile=@"d:\小区基础数据2011-08-12.mdb";
 	int i=0;
 
 	
 	string bulknew=@"
-	SELECT * INTO 小区基础数据0803
+	SELECT * INTO 小区基础数据_0812
 	FROM 
 	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...小区基础数据";
 	
