@@ -1,0 +1,170 @@
+
+<SCRIPT type=text/javascript>
+var gaJsHost = (("h"+"ttps:" == document.location.protocol) ? "h"+"ttps://ssl." : "h"+"ttp://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</SCRIPT>
+
+<SCRIPT type=text/javascript src="http://www.google-analytics.com/ga.js"></SCRIPT>
+
+<SCRIPT type=text/javascript>
+var pageTracker = _gat._getTracker("UA-3689458-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</SCRIPT>
+
+<DIV id=content>
+<FORM method=post name=topnewsform action="">
+<TABLE border=0 cellSpacing=0 cellPadding=0 width=720>
+<TBODY>
+<TR>
+<TD vAlign=top align=right><SELECT onchange=ShowContent(this.form.menu) name=menu><OPTION selected>參考各場心水推介</OPTION><OPTION value=5106>挪威超級聯賽</OPTION><OPTION value=5361>德國乙組聯賽</OPTION><OPTION value=5122>日本乙組聯賽</OPTION><OPTION value=5121>日本職業聯賽</OPTION><OPTION value=5161>南韓職業聯賽</OPTION><OPTION value=3377>球會友誼賽</OPTION><OPTION value=5086>瑞典超級聯賽</OPTION><OPTION value=5283>丹麥超級聯賽</OPTION><OPTION value=5120>芬蘭超級聯賽</OPTION><OPTION value=310>2011女子世界盃</OPTION><OPTION value=5282>瑞士超級聯賽</OPTION><OPTION value=5363>奧地利甲組聯賽</OPTION><OPTION value=311>2011美洲國家盃</OPTION><OPTION value=5139>美國職業大聯盟聯賽</OPTION><OPTION value=5192>巴西甲組聯賽</OPTION><OPTION value=5138>俄羅斯超級聯賽</OPTION></SELECT> </TD></TR></TBODY></TABLE>
+<TABLE border=1 cellSpacing=0 borderColor=#38a038 cellPadding=3 width=720></FORM>
+<TBODY>
+<TR bgColor=#b8edc9>
+<TD height=21 align=middle>
+<TABLE width="100%">
+<TBODY>
+<TR>
+<TD width=30>&nbsp;</TD>
+<TD align=middle><FONT color=#666666 size=5>挪威超級聯賽</FONT></TD>
+<TD width=30 align=right><IMG src="http://www.macauslot.com/logo/slotlogo.gif"></TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>奧特格寧蘭 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#006600>D</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>利尼史特朗</FONT><FONT size=2> ★★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>利尼史特朗</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>奧特格寧蘭 <FONT color=#ff0000>2勝</FONT><FONT color=#006600> 5和</FONT><FONT color=#0000ff> 3負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>奧特格寧蘭近期遭遇兩連敗，而利尼史特朗狀態全面回勇，當然追捧利尼史特朗今仗作客凱旋而歸。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>桑恩達 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>和局</FONT><FONT size=2> ★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>薩普斯堡</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>桑恩達 <FONT color=#ff0000>0勝</FONT><FONT color=#006600> 0和</FONT><FONT color=#0000ff> 1負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>兩隊實力較為接近而且近期表現皆未如理想，大家此番均缺少贏球本錢，不妨看好雙方各取1分。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>史卓加斯特 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>和局</FONT><FONT size=2> ★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>史達</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>史卓加斯特 <FONT color=#ff0000>3勝</FONT><FONT color=#006600> 2和</FONT><FONT color=#0000ff> 3負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>史卓加斯特近6仗各項賽事僅得1場勝利，而史達同樣表現未如理想，雙方在今仗均無取勝把握的情況下，兩隊很大可能打成平手。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>莫迪 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>莫迪</FONT><FONT size=2> ★★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>侯格辛特</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>莫迪 <FONT color=#ff0000>2勝</FONT><FONT color=#006600> 0和</FONT><FONT color=#0000ff> 1負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>莫迪近6仗各項賽事取勝5場，球隊狀態正佳；雖然侯格辛特上仗聯賽贏球止頹，但是球隊今季作客演出一塌糊塗，莫迪本輪主場出擊值得追捧。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>維京 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#006600>D</FONT><FONT color=#006600>D</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>阿利辛特</FONT><FONT size=2> ★★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>阿利辛特</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>維京 <FONT color=#ff0000>6勝</FONT><FONT color=#006600> 1和</FONT><FONT color=#0000ff> 3負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>維京上仗遭遇落敗，球隊狀態未有起色，此番面對來勢洶洶的阿利辛特，維京主場淪陷在所難免。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>史達比克 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>洛辛堡</FONT><FONT size=2> ★★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>洛辛堡</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#006600>D</FONT><FONT color=#006600>D</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>史達比克 <FONT color=#ff0000>4勝</FONT><FONT color=#006600> 0和</FONT><FONT color=#0000ff> 6負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>史達比克連續5輪聯賽無一勝績，而今仗對手洛辛堡近期聯賽表現大為改觀，客軍洛辛堡有力贏球而回。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>特羅素 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#006600>D</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#0000ff>L</FONT>－<FONT color=#ff0000>W</FONT>－<FONT color=#0000ff>L</FONT>－ </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>特羅素</FONT><FONT size=2> ★★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>華拿倫加</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT>－ </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>特羅素 <FONT color=#ff0000>4勝</FONT><FONT color=#006600> 3和</FONT><FONT color=#0000ff> 3負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>特羅素今季主場從未失過手，球隊主場戰鬥力十足，即使是役面對近期表現不俗的華拿倫加，特羅素還是值得看高一線。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#e3f9eb>
+<TD>
+<TABLE border=0 cellSpacing=1 cellPadding=0>
+<TBODY>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>費德列斯達 (主)</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>信心指數 - </FONT><FONT color=#6666ff size=2>費德列斯達</FONT><FONT size=2> ★★★★</FONT> </TD></TR>
+<TR align=left>
+<TD bgColor=#666666 height=15 width=95><FONT color=#ffffff size=3>白蘭恩</FONT> </TD>
+<TD height=15 width=159><FONT size=2>&nbsp;&nbsp;近況走勢 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#006600>D</FONT> </FONT></TD>
+<TD height=15 width=157><FONT size=2>盤路贏輸 - <FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#ff0000>W</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT><FONT color=#0000ff>L</FONT> </FONT></TD>
+<TD height=15 width=224><FONT size=2>對賽成績 - </FONT><FONT size=2>費德列斯達 <FONT color=#ff0000>4勝</FONT><FONT color=#006600> 1和</FONT><FONT color=#0000ff> 5負</FONT></FONT> </TD></TR>
+<TR align=left>
+<TD>&nbsp;</TD>
+<TD colSpan=3><FONT size=2>費德列斯達上仗聯賽落敗結束各項賽事三連勝，陣中球員滿腹怨氣，此番面對不擅作客的白蘭恩，費德列斯達借助主場之利勢必會大開殺戒。</FONT> </TD></TR></TBODY></TABLE></TD></TR>
+<TR bgColor=#b8edc9>
+<TD align=middle>
+<P>註：信心指數★★★★★為滿分。<BR>近況走勢及盤路贏輸均只刊出近六場記錄，右方為最新一場；<BR>對賽成績最多只刊出雙方最近十次於任何賽事之對賽。<BR>(W=勝、D=和、L=負) <BR></P>
+<P align=center><FONT size=2>以 上 純 屬 <FONT color=#ff0000>Simon</FONT> 個 人 意 見</FONT> </P></TD></TR></TBODY></TABLE></DIV>
