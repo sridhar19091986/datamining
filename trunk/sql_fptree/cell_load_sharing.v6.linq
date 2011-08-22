@@ -15,6 +15,8 @@
 
 void Main()
 {
+//切换取一周统计
+//GPRS/EDGE 复用度分开计算
 
 	/*
 	t=[0,110,250,245];
@@ -75,7 +77,7 @@ void Main()
 	**/
 
 	//替换1
-	var cellgprs2 = FG_小区小时GPRS资源_0816s;
+	var cellgprs2 =CELLGPRS_0822s ;//FG_小区小时GPRS资源_0816s;
 	//替换2
 	var cellbase = 小区基础数据_0816s;
 
@@ -96,7 +98,9 @@ void Main()
 		GPRS下行激活信道 = ttt.Average(e => e.GPRS下行激活信道),
 		EDGE下行激活信道 = ttt.Average(e => e.EDGE下行激活信道),
 		EDGE终端使用EDGE比例 = ttt.Average(e => e.EDGE终端使用EDGE比例),
-		T话务量tch_20h = erlangbinv(0.02, 0.975 * ttt.Average(e => e.T话务量)),
+		GPRS每线下行用户=ttt.Average(e=>e.GPRS每线下行用户),
+		EDGE每线下行用户=ttt.Average(e=>e.EDGE每线下行用户),
+		T话务量tch_20h = erlangbinv(0.02, 0.95 * ttt.Average(e => e.T话务量)),   //半速率取10%
 	};
 
 	//var faildltbf=tbf.OrderByDescending(e=>e.FAILDLTBFEST).Take(10).Select(e=>e.Cell_name).ToList();
@@ -105,7 +109,16 @@ void Main()
 	//				select new {p,q};
 
 	var celbase = cellbase.ToLookup(e => e.小区名);
-	var rel = from p in  Cdd_Nrel_Get()
+	
+	var relcell=Ho_Nrel_Get().ToList();
+	var nrelcell=relcell.ToLookup(e=>e.Cell_name+e.N_cell_name);
+	foreach(var m in Cdd_Nrel_Get())
+	  if(!nrelcell.Contains(m.Cell_name+m.N_cell_name))
+	     relcell.Add(m);     
+	
+	//var nrelcelldistinct=nrelcell.
+	
+	var rel = from p in  relcell
 			  join q in tbf on p.N_cell_name equals q.Cell_name
 			  //join t in 小区基础数据0803s  on p.N_cell_name equals t.小区名
 			  select new
@@ -113,21 +126,28 @@ void Main()
 		BSC = q.BSC,
 		p.Cell_name,
 		p.N_cell_name,
+		p.Handover,
 		方向角 = celbase[p.N_cell_name].Select(e => e.方向角).FirstOrDefault(),
 		下倾角 = celbase[p.N_cell_name].Select(e => e.下倾角).FirstOrDefault(),
 		海拔高度 = celbase[p.N_cell_name].Select(e => e.海拔高度).FirstOrDefault(),
 		下行TBF建立成功率 = ConvNullDouble(q.下行TBF建立成功率),
 		FAILDLTBFEST = ConvNullDouble(q.FAILDLTBFEST),	
-		T空闲信道 = ConvNullDouble(q.T可用信道 -q.T话务量tch_20h - q.平均分配PDCH),
-		PDCH复用度 = ConvNullDouble(q.PDCH复用度),
-		H话务比 = ConvNullDouble(q.H话务比),
 		EDGE终端使用EDGE比例 = ConvNullDouble(q.EDGE终端使用EDGE比例),
+		
+		T空闲信道 = ConvNullDouble(q.T可用信道 - q.平均分配PDCH*q.PDCH复用度/3.7 - q.T话务量tch_20h ),  //调整公式
+		平均分配PDCH=ConvNullDouble(q.平均分配PDCH),
+		PDCH复用度 = ConvNullDouble(q.PDCH复用度),
+		GPRS每线下行用户= ConvNullDouble(q.GPRS每线下行用户),
+		EDGE每线下行用户= ConvNullDouble(q.EDGE每线下行用户),
+		
 		T可用信道 = ConvNullDouble(q.T可用信道),
 		T话务量 = ConvNullDouble(q.T话务量),
-		百分20H话务比T信道 = ConvNullDouble(q.T话务量tch_20h),
-		平均分配PDCH=ConvNullDouble(q.平均分配PDCH),
+		H话务比 = ConvNullDouble(q.H话务比),
+		H话务比T信道 = ConvNullDouble(q.T话务量tch_20h),
+		
 		GPRS下行激活信道 = ConvNullDouble(q.GPRS下行激活信道),
 		EDGE下行激活信道 = ConvNullDouble(q.EDGE下行激活信道),
+		EDGE信道数简易计算=q.EDGE每线下行用户<3.7?0:q.EDGE下行激活信道*(q.EDGE每线下行用户/3.7)
 	};
 
 
@@ -154,10 +174,12 @@ void Main()
 
 		Variance_detail = ttt.Where(e => e.Cell_name == ttt.Key).OrderByDescending(e => e.FAILDLTBFEST)
 	};
+	
+    variance.ToList().Where(e=>e.Cell_name.IndexOf("渔业村")!=-1).Dump();
+	
+	//variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
 
-	variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
-
-    variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
+    //variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
 	
 //	var dltbf=variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(2000);
 //	var tbf=from p in dltbf
@@ -188,6 +210,42 @@ static double ConvNullDouble( int? ss)
 }
 
 
+public List<CellName> Ho_Nrel_Get()
+{
+	//替换3
+	var cdd_nrel =小区切换查询_0816s;
+	
+	var nrelation = cdd_nrel.ToLookup(e=>e.小区名);
+
+	List<CellName> nrel = new List<CellName>();
+
+    //string temp="";
+	int thr=0;
+	foreach(var n in nrelation)
+	{
+	    var nreltop=n.OrderByDescending(e=>e.切换次数);
+		foreach(var nn in nreltop)
+		{
+		 thr++;
+		 if(thr>5) continue;    //top5 小区
+		 CellName cn = new CellName();
+		cn.Cell_name = n.Key;
+		cn.N_cell_name=nn.邻小区名;
+		cn.Handover=nn.切换次数;
+		nrel.Add(cn);
+		}
+		thr=0;
+	}
+	foreach(var n in nrelation)
+	{
+		CellName cn = new CellName();
+		cn.Cell_name = n.Key;
+		cn.N_cell_name = n.Key;
+		nrel.Add(cn);
+	}
+	return nrel;
+}
+
 public List<CellName> Cdd_Nrel_Get()
 {
 	//替换3
@@ -198,7 +256,7 @@ public List<CellName> Cdd_Nrel_Get()
 					select new {p.Cell_name, p.N_cell_name};
 	var nnative = cdd_nrel.Select(e => e.Cell_name).Distinct();
 
-    //string temp="";
+	//string temp="";
 	foreach(var n in nrelation)
 	{
 		CellName cn = new CellName();
@@ -225,6 +283,7 @@ public class CellName
 {
 	public string Cell_name { get; set; }
 	public string N_cell_name { get; set; }
+	public int? Handover { get; set; }
 }
 private int erlangbinv(double p, double? erlang)
 {

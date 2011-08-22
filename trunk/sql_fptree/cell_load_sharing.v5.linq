@@ -113,6 +113,7 @@ void Main()
 		BSC = q.BSC,
 		p.Cell_name,
 		p.N_cell_name,
+		p.Handover,
 		方向角 = celbase[p.N_cell_name].Select(e => e.方向角).FirstOrDefault(),
 		下倾角 = celbase[p.N_cell_name].Select(e => e.下倾角).FirstOrDefault(),
 		海拔高度 = celbase[p.N_cell_name].Select(e => e.海拔高度).FirstOrDefault(),
@@ -157,7 +158,7 @@ void Main()
 
 	variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
 
-    variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
+    //variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
 	
 //	var dltbf=variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(2000);
 //	var tbf=from p in dltbf
@@ -191,31 +192,34 @@ static double ConvNullDouble( int? ss)
 public List<CellName> Cdd_Nrel_Get()
 {
 	//替换3
-	var cdd_nrel =现网cdd_Nrel_0816s ;
+	var cdd_nrel =小区切换查询_0816s;
+	
+	var nrelation = cdd_nrel.ToLookup(e=>e.小区名);
 
 	List<CellName> nrel = new List<CellName>();
-	var nrelation = from p in cdd_nrel
-					select new {p.Cell_name, p.N_cell_name};
-	var nnative = cdd_nrel.Select(e => e.Cell_name).Distinct();
 
     //string temp="";
+	int thr=0;
+	foreach(var n in nrelation)
+	{
+	    var nreltop=n.OrderByDescending(e=>e.切换次数);
+		foreach(var nn in nreltop)
+		{
+		 thr++;
+		 if(thr>5) continue;    //top5 小区
+		 CellName cn = new CellName();
+		cn.Cell_name = n.Key;
+		cn.N_cell_name=nn.邻小区名;
+		cn.Handover=nn.切换次数;
+		nrel.Add(cn);
+		}
+		thr=0;
+	}
 	foreach(var n in nrelation)
 	{
 		CellName cn = new CellName();
-		cn.Cell_name = n.Cell_name;
-		cn.N_cell_name = n.N_cell_name;
-		if(cn.Cell_name.Length>2 && cn.N_cell_name.Length>2)
-		{
-		if(cn.Cell_name.IndexOf(cn.N_cell_name.Substring(0, cn.N_cell_name.Length - 2)) != -1)
-		  if(cn.Cell_name.Length==cn.N_cell_name.Length)   //比较长度即可
-			nrel.Add(cn);
-		}
-	}
-	foreach(string n in nnative)
-	{
-		CellName cn = new CellName();
-		cn.Cell_name = n;
-		cn.N_cell_name = n;
+		cn.Cell_name = n.Key;
+		cn.N_cell_name = n.Key;
 		nrel.Add(cn);
 	}
 	return nrel;
@@ -225,6 +229,7 @@ public class CellName
 {
 	public string Cell_name { get; set; }
 	public string N_cell_name { get; set; }
+	public int? Handover { get; set; }
 }
 private int erlangbinv(double p, double? erlang)
 {
