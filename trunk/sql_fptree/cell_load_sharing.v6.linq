@@ -1,7 +1,6 @@
 <Query Kind="Program">
   <Connection>
-    <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
-    <Persist>true</Persist>
+    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
     <Server>localhost</Server>
     <Database>CellLoadSharing</Database>
     <ShowServer>true</ShowServer>
@@ -77,7 +76,7 @@ void Main()
 	**/
 
 	//替换1
-	var cellgprs2 =CELLGPRS_0822s ;//FG_小区小时GPRS资源_0816s;
+	var cellgprs2 =CELLGPRS_0822_1s ;//FG_小区小时GPRS资源_0816s;
 	//替换2
 	var cellbase = 小区基础数据_0816s;
 
@@ -147,7 +146,7 @@ void Main()
 		
 		GPRS下行激活信道 = ConvNullDouble(q.GPRS下行激活信道),
 		EDGE下行激活信道 = ConvNullDouble(q.EDGE下行激活信道),
-		EDGE信道数简易计算=q.EDGE每线下行用户<3.7?0:q.EDGE下行激活信道*(q.EDGE每线下行用户/3.7)
+		EDGE信道数简易计算=4*Math.Floor((decimal)(q.EDGE每线下行用户<3.7?0:q.EDGE下行激活信道*(q.EDGE每线下行用户/3.7))/4),
 	};
 
 
@@ -175,11 +174,13 @@ void Main()
 		Variance_detail = ttt.Where(e => e.Cell_name == ttt.Key).OrderByDescending(e => e.FAILDLTBFEST)
 	};
 	
-    variance.ToList().Where(e=>e.Cell_name.IndexOf("渔业村")!=-1).Dump();
+    //variance.ToList().Where(e=>e.Cell_name.IndexOf("渔业村")!=-1).Dump();
 	
 	//variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
 
     //variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
+	
+	variance.ToList().OrderByDescending(e => e.Balance_T空闲信道).Take(1000).Dump();
 	
 //	var dltbf=variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(2000);
 //	var tbf=from p in dltbf
@@ -213,7 +214,7 @@ static double ConvNullDouble( int? ss)
 public List<CellName> Ho_Nrel_Get()
 {
 	//替换3
-	var cdd_nrel =小区切换查询_0816s;
+	var cdd_nrel =小区切换查询_0822_1s;
 	
 	var nrelation = cdd_nrel.ToLookup(e=>e.小区名);
 
