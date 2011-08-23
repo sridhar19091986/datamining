@@ -1,6 +1,7 @@
 <Query Kind="Program">
   <Connection>
-    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
+    <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
+    <Persist>true</Persist>
     <Server>localhost</Server>
     <Database>CellLoadSharing</Database>
     <ShowServer>true</ShowServer>
@@ -15,14 +16,14 @@ void Main()
 	//现网cdd_Channel
 
 //    此2行修改
-	string mdbfile=@"d:\CELLGPRS2011-08-22.mdb";
+	string mdbfile=@"d:\小区切换查询2011-08-22.mdb";
 	int i=0;
 
 	
 	string bulknew=@"
-	SELECT * INTO CELLGPRS_0822
+	SELECT * INTO 小区切换查询_0822
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...CELLGPRS";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...小区切换查询";
 	
 	string bulkinsert=@"
 	
