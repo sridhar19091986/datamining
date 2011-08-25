@@ -80,6 +80,9 @@ void Main()
 	var cellgprs2 =CELLGPRS_0822_1s ;//FG_小区小时GPRS资源_0816s;
 	//替换2
 	var cellbase =小区基础数据_0822s;
+	
+	//替换5
+	var celldatabase =现网cdd_0822s;
 
 	var tbf = from p in cellgprs2
 			  //where p.BSC == "SZ35B"
@@ -120,6 +123,7 @@ void Main()
 	
 	var rel = from p in  relcell
 			  join q in tbf on p.N_cell_name equals q.Cell_name
+			  join t in celldatabase on  p.N_cell_name equals  t.Cell_name
 			  //join t in 小区基础数据0803s  on p.N_cell_name equals t.小区名
 			  select new
 	{
@@ -127,6 +131,9 @@ void Main()
 		p.Cell_name,
 		p.N_cell_name,
 		p.Handover,
+		t.Cro,
+		t.Pt,
+		t.To,
 		方向角 = celbase[p.N_cell_name].Select(e => e.方向角).FirstOrDefault(),
 		下倾角 = celbase[p.N_cell_name].Select(e => e.下倾角).FirstOrDefault(),
 		海拔高度 = celbase[p.N_cell_name].Select(e => e.海拔高度).FirstOrDefault(),
@@ -177,11 +184,11 @@ void Main()
 	
     //variance.ToList().Where(e=>e.Cell_name.IndexOf("渔业村")!=-1).Dump();
 	
-	//variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
+	variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
 
     //variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
 	
-	variance.ToList().OrderByDescending(e => e.Balance_T空闲信道).Take(1000).Dump();
+	//variance.ToList().OrderByDescending(e => e.Balance_T空闲信道).Take(1000).Dump();
 	
 //	var dltbf=variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(2000);
 //	var tbf=from p in dltbf
