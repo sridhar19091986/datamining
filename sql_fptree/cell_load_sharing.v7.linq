@@ -1,8 +1,8 @@
 <Query Kind="Program">
   <Connection>
-    <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
-    <Persist>true</Persist>
+    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
     <Server>localhost</Server>
+    <Persist>true</Persist>
     <Database>CellLoadSharing</Database>
     <ShowServer>true</ShowServer>
   </Connection>
@@ -120,10 +120,17 @@ void Main()
 	     relcell.Add(m);     
 	
 	//var nrelcelldistinct=nrelcell.
+	var mrr=from p in MRR_0822s
+	        select new 
+	{
+	  p.小区名,
+	  dllevel=p.DL覆盖75>50?75:p.DL覆盖85>50?85:p.DL覆盖90>50?90:94
+	};
 	
 	var rel = from p in  relcell
 			  join q in tbf on p.N_cell_name equals q.Cell_name
 			  join t in celldatabase on  p.N_cell_name equals  t.Cell_name
+			  join m in mrr on p.N_cell_name equals m.小区名
 			  //join t in 小区基础数据0803s  on p.N_cell_name equals t.小区名
 			  select new
 	{
@@ -134,20 +141,27 @@ void Main()
 		t.Cro,
 		t.Pt,
 		t.To,
+		t.Accmin,
+		mrr=-m.dllevel,
+		C2=t.Pt==31?(-m.dllevel-(-t.Accmin)-t.Cro):(-m.dllevel-(-t.Accmin)+t.Cro-t.To*t.Pt),
 		方向角 = celbase[p.N_cell_name].Select(e => e.方向角).FirstOrDefault(),
 		下倾角 = celbase[p.N_cell_name].Select(e => e.下倾角).FirstOrDefault(),
 		海拔高度 = celbase[p.N_cell_name].Select(e => e.海拔高度).FirstOrDefault(),
+		
+		T空闲信道 = ConvNullDouble(q.T可用信道 - q.平均分配PDCH*q.PDCH复用度/3.7 - q.T话务量tch_20h ),  //调整公式
+		T可用信道 = ConvNullDouble(q.T可用信道),
+			
 		下行TBF建立成功率 = ConvNullDouble(q.下行TBF建立成功率),
 		FAILDLTBFEST = ConvNullDouble(q.FAILDLTBFEST),	
 		EDGE终端使用EDGE比例 = ConvNullDouble(q.EDGE终端使用EDGE比例),
 		
-		T空闲信道 = ConvNullDouble(q.T可用信道 - q.平均分配PDCH*q.PDCH复用度/3.7 - q.T话务量tch_20h ),  //调整公式
+	
 		平均分配PDCH=ConvNullDouble(q.平均分配PDCH),
 		PDCH复用度 = ConvNullDouble(q.PDCH复用度),
 		GPRS每线下行用户= ConvNullDouble(q.GPRS每线下行用户),
 		EDGE每线下行用户= ConvNullDouble(q.EDGE每线下行用户),
 		
-		T可用信道 = ConvNullDouble(q.T可用信道),
+	
 		T话务量 = ConvNullDouble(q.T话务量),
 		H话务比 = ConvNullDouble(q.H话务比),
 		H话务比T信道 = ConvNullDouble(q.T话务量tch_20h),
