@@ -1,8 +1,8 @@
 <Query Kind="Program">
   <Connection>
-    <ID>4bf09d82-2274-4382-a6e9-bea773c75ba2</ID>
-    <Server>localhost</Server>
+    <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
     <Persist>true</Persist>
+    <Server>localhost</Server>
     <Database>CellLoadSharing</Database>
     <ShowServer>true</ShowServer>
   </Connection>
@@ -78,6 +78,7 @@ void Main()
 
 	//替换1
 	var cellgprs2 =CELLGPRS_0822_1s ;//FG_小区小时GPRS资源_0816s;
+	
 	//替换2
 	var cellbase =小区基础数据_0822s;
 	
@@ -142,17 +143,20 @@ void Main()
 		t.Pt,
 		t.To,
 		t.Accmin,
-		mrr=-m.dllevel,
-		C2=t.Pt==31?(-m.dllevel-(-t.Accmin)-t.Cro):(-m.dllevel-(-t.Accmin)+t.Cro-t.To*t.Pt),
+		mrrRX=-m.dllevel,
+		C2=(t.Pt==31?(-m.dllevel-(-t.Accmin)-2*t.Cro):(-m.dllevel-(-t.Accmin)+2*t.Cro-t.To*t.Pt)),
 		方向角 = celbase[p.N_cell_name].Select(e => e.方向角).FirstOrDefault(),
 		下倾角 = celbase[p.N_cell_name].Select(e => e.下倾角).FirstOrDefault(),
 		海拔高度 = celbase[p.N_cell_name].Select(e => e.海拔高度).FirstOrDefault(),
 		
 		T空闲信道 = ConvNullDouble(q.T可用信道 - q.平均分配PDCH*q.PDCH复用度/3.7 - q.T话务量tch_20h ),  //调整公式
+		T信道需求=ConvNullDouble(q.平均分配PDCH*q.PDCH复用度/3.7 + q.T话务量tch_20h ),
 		T可用信道 = ConvNullDouble(q.T可用信道),
-			
+		
+		FAILDLTBFEST = ConvNullDouble(q.FAILDLTBFEST),
+		
 		下行TBF建立成功率 = ConvNullDouble(q.下行TBF建立成功率),
-		FAILDLTBFEST = ConvNullDouble(q.FAILDLTBFEST),	
+			
 		EDGE终端使用EDGE比例 = ConvNullDouble(q.EDGE终端使用EDGE比例),
 		
 	
@@ -182,10 +186,10 @@ void Main()
 	{
 		BSC = ttt.Select(e => e.BSC).FirstOrDefault(),
 		Cell_name = ttt.Key,
-
-		FAILDLTBFEST = ttt.Where(e => e.N_cell_name == ttt.Key).Sum(e => e.FAILDLTBFEST),
-
+		
 		Balance_T空闲信道 = ttt.Where(e => e.Cell_name == ttt.Key).Sum(e => e.T空闲信道),
+		
+		FAILDLTBFEST = ttt.Where(e => e.N_cell_name == ttt.Key).Sum(e => e.FAILDLTBFEST),
 
 		//Variance_FAILDLTBFEST = Variance(ttt.Select(e => e.FAILDLTBFEST/10000)),
 		Variance_T空闲信道 = Variance(ttt.Select(e => e.T空闲信道)),
@@ -198,7 +202,7 @@ void Main()
 	
     //variance.ToList().Where(e=>e.Cell_name.IndexOf("渔业村")!=-1).Dump();
 	
-	variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
+	variance.ToList().Where(e=>e.Balance_T空闲信道 >0).OrderByDescending(e => e.FAILDLTBFEST).Take(100).Dump();
 
     //variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
 	
