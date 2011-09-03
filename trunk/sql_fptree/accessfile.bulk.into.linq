@@ -21,7 +21,7 @@ void Main()
 
 	
 	string bulknew=@"
-	SELECT * INTO 小区基础数据_0822
+	SELECT * INTO 小区基础数据_0902
 	FROM 
 	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...小区基础数据";
 	

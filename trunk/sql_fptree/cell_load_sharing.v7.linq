@@ -77,13 +77,13 @@ void Main()
 	**/
 
 	//替换1
-	var cellgprs2 =CELLGPRS_0822_1s ;//FG_小区小时GPRS资源_0816s;
+	var cellgprs2 =CELLGPRS_0902_1s;//CELLGPRS_0902s;//CELLGPRS_0822_1s ;//FG_小区小时GPRS资源_0816s;
 	
 	//替换2
 	var cellbase =小区基础数据_0822s;
 	
 	//替换5
-	var celldatabase =现网cdd_0822s;
+	var celldatabase =小区基础数据_0902s;//MRR_0902s;//现网cdd_0822s;
 
 	var tbf = from p in cellgprs2
 			  //where p.BSC == "SZ35B"
@@ -120,13 +120,17 @@ void Main()
 	  if(!nrelcell.Contains(m.Cell_name+m.N_cell_name))
 	     relcell.Add(m);     
 	
+	//替换6
 	//var nrelcelldistinct=nrelcell.
-	var mrr=from p in MRR_0822s
+	var mrr=from p in MRR_0902s//MRR_0822s
 	        select new 
 	{
 	  p.小区名,
 	  dllevel=p.DL覆盖75>50?75:p.DL覆盖85>50?85:p.DL覆盖90>50?90:94
 	};
+	
+	//规划用EDGE复用度，取3.7么？
+	int MsPerEdge=6;
 	
 	var rel = from p in  relcell
 			  join q in tbf on p.N_cell_name equals q.Cell_name
@@ -149,8 +153,8 @@ void Main()
 		下倾角 = celbase[p.N_cell_name].Select(e => e.下倾角).FirstOrDefault(),
 		海拔高度 = celbase[p.N_cell_name].Select(e => e.海拔高度).FirstOrDefault(),
 		
-		T空闲信道 = ConvNullDouble(q.T可用信道 - q.平均分配PDCH*q.PDCH复用度/3.7 - q.T话务量tch_20h ),  //调整公式
-		T信道需求=ConvNullDouble(q.平均分配PDCH*q.PDCH复用度/3.7 + q.T话务量tch_20h ),
+		T空闲信道 = ConvNullDouble(q.T可用信道 - q.平均分配PDCH*q.PDCH复用度/MsPerEdge - q.T话务量tch_20h ),  //调整公式
+		T信道需求=ConvNullDouble(q.平均分配PDCH*q.PDCH复用度/MsPerEdge + q.T话务量tch_20h ),
 		T可用信道 = ConvNullDouble(q.T可用信道),
 		
 		FAILDLTBFEST = ConvNullDouble(q.FAILDLTBFEST),
@@ -172,7 +176,7 @@ void Main()
 		
 		GPRS下行激活信道 = ConvNullDouble(q.GPRS下行激活信道),
 		EDGE下行激活信道 = ConvNullDouble(q.EDGE下行激活信道),
-		EDGE信道数简易计算=4*Math.Floor((decimal)(q.EDGE每线下行用户<3.7?0:q.EDGE下行激活信道*(q.EDGE每线下行用户/3.7))/4),
+		EDGE信道数简易计算=4*Math.Floor((decimal)(q.EDGE每线下行用户<MsPerEdge?0:q.EDGE下行激活信道*(q.EDGE每线下行用户/MsPerEdge))/4),
 	};
 
 
@@ -200,9 +204,9 @@ void Main()
 		Variance_detail = ttt.Where(e => e.Cell_name == ttt.Key).OrderByDescending(e => e.FAILDLTBFEST)
 	};
 	
-    //variance.ToList().Where(e=>e.Cell_name.IndexOf("渔业村")!=-1).Dump();
+    variance.ToList().Where(e=>e.Cell_name.IndexOf("观澜桂岭")!=-1).Dump();
 	
-	variance.ToList().Where(e=>e.Balance_T空闲信道 >0).OrderByDescending(e => e.FAILDLTBFEST).Take(100).Dump();
+	//variance.ToList().Where(e=>e.Balance_T空闲信道 >0).OrderByDescending(e => e.FAILDLTBFEST).Take(1000).Dump();
 
     //variance.ToList().OrderByDescending(e => e.FAILDLTBFEST).Skip(1000).Take(1000).Dump();
 	
