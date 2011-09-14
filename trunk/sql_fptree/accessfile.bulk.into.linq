@@ -16,14 +16,14 @@ void Main()
 	//现网cdd_Channel
 
 //    此2行修改
-	string mdbfile=@"d:\小区基础数据2011-08-24.mdb";
+	string mdbfile=@"d:\FG_BSC小时GPRS流量2011-09-06.mdb";
 	int i=0;
 
 	
 	string bulknew=@"
-	SELECT * INTO 小区基础数据_0902
+	SELECT * INTO FG_BSC小时GPRS流量
 	FROM 
-	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...小区基础数据";
+	OPENDATASOURCE ('Microsoft.Jet.OLEDB.4.0','Data Source="+"\""+mdbfile+"\""+@";User ID=Admin;Password=' )...FG_BSC小时GPRS流量";
 	
 	string bulkinsert=@"
 	
