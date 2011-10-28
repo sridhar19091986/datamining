@@ -13,12 +13,11 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-var mint=Abis_Imms.Min(e=>e.PacketTime);
+var mint=Abis_GPRS_suspensions.Min(e=>e.PacketTime);
 
-var maxt=Abis_Imms.Max(e=>e.PacketTime);
+var maxt=Abis_GPRS_suspensions.Max(e=>e.PacketTime);
 
 
 var tttimer=mint.Value.ToString()+maxt.Value.ToString();
 
 tttimer.Dump();
-

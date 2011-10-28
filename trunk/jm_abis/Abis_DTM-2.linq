@@ -24,10 +24,12 @@ var sus=from p in Abis_DTMs
 		where p.DumpFor=="EndFlowByFlowDesigner"
 		//where p.DTMReject==null
         group p by new 
-		{ERROR_INDication=p.ERROR_INDication==null?0:1,
-		Main_DCCH_Assignment_Command=p.Main_DCCH_Assignment_Command ==null?0:1,
-		Packet_Assignment_Command=p.Packet_Assignment_Command==null?0:1,
-		DTM_Assignment_Command=p.DTM_Assignment_Command==null?0:1,
+		{
+		ERROR_INDication=p.ERROR_INDication==null?0:1,
+			//ERROR_INDication=p.ERROR_INDication??0,
+		DTM_Response=(p.Main_DCCH_Assignment_Command??0 +
+		p.Packet_Assignment_Command??0+
+		p.DTM_Assignment_Command??0)>0?1:0,          //?? ?:运算符计算
 		DTM_Reject=p.DTMReject ==null?0:1}
 		
 		into ttt
@@ -36,15 +38,15 @@ var sus=from p in Abis_DTMs
 		  DTM_Request=1,
 		   DTM_Reject=ttt.Key.DTM_Reject,
 		   //DTM_Assignment_Failure=ttt.Key.DTM_Assignment_Failure,
-		   Main_DCCH_Assignment_Command=ttt.Key.Main_DCCH_Assignment_Command,
-		   Packet_Assignment_Command=ttt.Key.Packet_Assignment_Command,
-		   DTM_Assignment_Command=ttt.Key.DTM_Assignment_Command,
+		   DTM_Response=ttt.Key.DTM_Response,
+		  // Packet_Assignment_Command=ttt.Key.Packet_Assignment_Command,
+		   //DTM_Assignment_Command=ttt.Key.DTM_Assignment_Command,
 		   ERROR_INDication=ttt.Key.ERROR_INDication,
 		   valueCount=ttt.Count(),
 		   //valueDelay=ttt.Average(e=>e.PacketTimems),
 		   valueRate=1.0*ttt.Count()/valueSum,
 		};
 
-sus.OrderByDescending(e=>e.valueCount).OrderBy(e=>e.Main_DCCH_Assignment_Command).OrderBy(e=>e.DTM_Reject).Dump();
+sus.OrderByDescending(e=>e.valueCount).OrderBy(e=>e.DTM_Response).OrderBy(e=>e.DTM_Reject).Dump();
 
 //Abis_DTMs.Where(e=>e.ERROR_INDication !=null).Dump();
