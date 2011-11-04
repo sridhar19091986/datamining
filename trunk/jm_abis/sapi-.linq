@@ -3,7 +3,7 @@
     <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
     <Persist>true</Persist>
     <Server>localhost</Server>
-    <Database>AbisJiangMeng</Database>
+    <Database>imm_jm</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <Reference>G:\htmlconvertsql\SqlCompact.v.2011.05.21\Soccer Score Forecast\Soccer Score Forecast\bin\Release\HtmlAgilityPack.dll</Reference>
@@ -13,11 +13,16 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-var mint=Abis_Imms.Min(e=>e.PacketTime);
+var sapi=from p in Abis_Imms
+         
+		 group p by p.Wait_indication into ttt
+		 
+		 select new 
+		 
+		 {
+		    ttt.Key,
+			valueCount=ttt.Count()
+		 
+		 };
 
-var maxt=Abis_Imms.Max(e=>e.PacketTime);
-
-
-var tttimer=mint.Value.ToString()+maxt.Value.ToString();
-
-tttimer.Dump();
+sapi.Dump();
