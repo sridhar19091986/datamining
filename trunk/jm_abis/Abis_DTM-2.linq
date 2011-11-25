@@ -3,7 +3,7 @@
     <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
     <Persist>true</Persist>
     <Server>localhost</Server>
-    <Database>AbisJiangMeng</Database>
+    <Database>imm_jm</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <Reference>G:\htmlconvertsql\SqlCompact.v.2011.05.21\Soccer Score Forecast\Soccer Score Forecast\bin\Release\HtmlAgilityPack.dll</Reference>

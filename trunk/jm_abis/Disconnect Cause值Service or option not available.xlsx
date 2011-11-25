@@ -1,0 +1,47 @@
+<Query Kind="Statements">
+  <Connection>
+    <ID>a116a106-fc11-40b0-a229-fcdf8e0f71a9</ID>
+    <Persist>true</Persist>
+    <Driver Assembly="IQDriver" PublicKeyToken="5b59726538a49684">IQDriver.IQDriver</Driver>
+    <Provider>Devart.Data.MySql</Provider>
+    <CustomCxString>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZLcVh8Gjs02sCq6PBfQDZAAAAAACAAAAAAADZgAAqAAAABAAAADUieA9U/KBduAdSJjm9PGEAAAAAASAAACgAAAAEAAAAMWghr2Pid0ZTzZUbWw5xnFQAAAAJchWiUvtZgmvCCkB+mRqNyPWWpiYyjyTiv7ZWzbcrgrASabyGGxs4PEOLeSnglrQqHLYMLoYsvzaTMbW77jBN0H/GiVcqRAO3By+t8LrLOcUAAAAowzXGBzeZj/7dGNx+4+tDVbEIuo=</CustomCxString>
+    <Server>localhost</Server>
+    <Database>testabis_tomap2</Database>
+    <UserName>root</UserName>
+    <Password>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZLcVh8Gjs02sCq6PBfQDZAAAAAACAAAAAAADZgAAqAAAABAAAAB0oQbSY/D2O0E1jgCQBtMNAAAAAASAAACgAAAAEAAAAIXgN3Rj6cpsmrlJIJ6ek68IAAAAbf/mlrp5RdkUAAAAwjqhuF9wXfqabpgboEPSbxdlqCw=</Password>
+    <EncryptCustomCxString>true</EncryptCustomCxString>
+    <DriverData>
+      <StripUnderscores>false</StripUnderscores>
+      <QuietenAllCaps>false</QuietenAllCaps>
+      <Port>3306</Port>
+    </DriverData>
+    <DriverData>
+      <StripUnderscores>false</StripUnderscores>
+      <QuietenAllCaps>false</QuietenAllCaps>
+      <Port>3306</Port>
+    </DriverData>
+  </Connection>
+  <Reference>G:\htmlconvertsql\SqlCompact.v.2011.05.21\Soccer Score Forecast\Soccer Score Forecast\bin\Release\HtmlAgilityPack.dll</Reference>
+  <Reference>D:\Program Files\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Types.dll</Reference>
+  <Namespace>HtmlAgilityPack</Namespace>
+  <Namespace>Microsoft.SqlServer.Types</Namespace>
+  <IncludePredicateBuilder>true</IncludePredicateBuilder>
+</Query>
+
+var cause=from p in Abis_cause_201101050915s
+          where p.Message_Type==37
+          group p by new {p.Message_Type,p.Cause_type,p.Cause_Value,p.Protocol} into ttt
+		  
+		  select new 
+		  
+		  {
+		     Message_Type=ttt.Key.Message_Type,  //{ 0x25,	"Disconnect" },
+			  Cause_type=ttt.Key.Cause_type,
+			   Cause_Value=ttt.Key.Cause_Value,
+			    Protocol=ttt.Key.Protocol,
+			valueCount= ttt.Count(),
+		  
+		  
+		  };
+
+cause.OrderBy(e=>e.valueCount).Dump();

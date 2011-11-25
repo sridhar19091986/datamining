@@ -3,7 +3,7 @@
     <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
     <Persist>true</Persist>
     <Server>localhost</Server>
-    <Database>AbisJiangMeng</Database>
+    <Database>imm_jm</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <Reference>G:\htmlconvertsql\SqlCompact.v.2011.05.21\Soccer Score Forecast\Soccer Score Forecast\bin\Release\HtmlAgilityPack.dll</Reference>
@@ -47,4 +47,4 @@ var sus=from p in Abis_DTMs
 
 sus.OrderByDescending(e=>e.valueCount).OrderBy(e=>e.Main_DCCH_Assignment_Command).OrderBy(e=>e.DTM_Reject).Dump();
 
-//Abis_DTMs.Where(e=>e.ERROR_INDication !=null).Dump();
+Abis_DTMs.Where(e=>e.ERROR_INDication !=null).Dump();
