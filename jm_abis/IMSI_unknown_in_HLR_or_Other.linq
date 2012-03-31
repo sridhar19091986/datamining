@@ -2,14 +2,13 @@
   <Connection>
     <ID>76932288-1882-4022-a8fb-c01693c0810c</ID>
     <Persist>true</Persist>
-    <Driver Assembly="IQDriver" PublicKeyToken="5b59726538a49684">IQDriver.IQDriver</Driver>
     <Provider>Devart.Data.MySql</Provider>
-    <CustomCxString>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZLcVh8Gjs02sCq6PBfQDZAAAAAACAAAAAAADZgAAqAAAABAAAACTNuYXkfk66zdd04KiO8wGAAAAAASAAACgAAAAEAAAAIOK7HFTUbC4NvHwmY54AThAAAAAYKS1JdvPz5iWCN+bVClSqdEdGOTZYMPe388yxJbFLsrQLNQremir6pv+EuhDT42GyAqHjKDtruU3cS1x7UlBXBQAAAA9C6jhKoipfqKkln91vqhRHssrBA==</CustomCxString>
+    <CustomCxString>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZLcVh8Gjs02sCq6PBfQDZAAAAAACAAAAAAADZgAAqAAAABAAAACiCz6fEkH469J/EfadE5bbAAAAAASAAACgAAAAEAAAAA79yvaUcfgezEFsepufT99AAAAAbde1n+Xb2JSTWeHnLtJn7AJnlFc/Ofn9rrM7q0XPNd6/6NElIyt853XHqyewFu3xdtnCU4IW0mj8CwbouIFAuRQAAAD0I/FHWDdneXeyR/kT4lQDV9Gb/A==</CustomCxString>
     <Server>localhost</Server>
+    <Database>mysql</Database>
     <UserName>root</UserName>
     <Password>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZLcVh8Gjs02sCq6PBfQDZAAAAAACAAAAAAADZgAAqAAAABAAAADkrYJ5ii5dOlB54Q4g4VNRAAAAAASAAACgAAAAEAAAALRZpGA5TrMbTQf5Q7s/6/IIAAAAo4mX5DXQQiEUAAAArcrXZk87oLcEm3N3crj52U5a5Ak=</Password>
     <EncryptCustomCxString>true</EncryptCustomCxString>
-    <Database>test</Database>
     <DriverData>
       <StripUnderscores>false</StripUnderscores>
       <QuietenAllCaps>false</QuietenAllCaps>
@@ -37,6 +36,3 @@ var imsi=from p in Tmp_tables
 		 };
 		 
 	imsi.OrderByDescending(e=>e.Location_Updating_Reject_Count).Dump();
-		 
-		 
-		 

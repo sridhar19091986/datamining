@@ -42,6 +42,8 @@ public class ParkingSpaceKey {
 
 //帧号  ？？？？？
 
+//  用时间+imsi  或者 sccp 生成 guid  , 都可转换成 int ?
+
 	public class EqualityComparer : IEqualityComparer<ParkingSpaceKey> {
 
 		public bool Equals(ParkingSpaceKey x, ParkingSpaceKey y) {
