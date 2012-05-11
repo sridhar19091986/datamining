@@ -3,7 +3,7 @@
     <ID>92afe844-6bee-429a-8d93-c850e50afd51</ID>
     <Persist>true</Persist>
     <Server>localhost</Server>
-    <Database>AbisJiangMeng</Database>
+    <Database>GuangZhou_Gn</Database>
     <ShowServer>true</ShowServer>
   </Connection>
   <Reference>G:\htmlconvertsql\SqlCompact.v.2011.05.21\Soccer Score Forecast\Soccer Score Forecast\bin\Release\HtmlAgilityPack.dll</Reference>
@@ -13,9 +13,14 @@
   <IncludePredicateBuilder>true</IncludePredicateBuilder>
 </Query>
 
-var mint=Abis_Imms.Min(e=>e.PacketTime);
+var mint=Mpos_gn_commons.Min(e=>e.Start_Date_Time);
 
-var maxt=Abis_Imms.Max(e=>e.PacketTime);
+var maxt=Mpos_gn_commons.Max(e=>e.Start_Date_Time);
+
+TimeSpan t = maxt.Value -mint.Value;
+
+t.Dump();
+
 
 
 var tttimer=mint.Value.ToString()+maxt.Value.ToString();
